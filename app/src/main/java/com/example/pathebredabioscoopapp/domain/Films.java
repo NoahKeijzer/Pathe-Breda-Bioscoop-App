@@ -1,5 +1,7 @@
 package com.example.pathebredabioscoopapp.domain;
 
+import com.example.pathebredabioscoopapp.controller.MovieController;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -127,5 +129,9 @@ public class Films {
 
     public void setActors(ArrayList<Actors> actors) {
         this.actors = actors;
+    }
+
+    public Object getFullPosterPath() {
+        return MovieController.BASE_POSTER_PATH_URL + poster;
     }
 }
