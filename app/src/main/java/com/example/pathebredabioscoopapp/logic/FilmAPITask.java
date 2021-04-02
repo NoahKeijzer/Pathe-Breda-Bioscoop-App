@@ -1,9 +1,13 @@
 package com.example.pathebredabioscoopapp.logic;
 
 import android.os.AsyncTask;
+
+import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.domain.Films;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
 
 public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Character>> {
     private final String TAG = getClass().getSimpleName();
@@ -26,6 +30,10 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Character>> {
     @Override
     protected void onPostExecute(ArrayList<Character> characters) {
         super.onPostExecute(characters);
+    }
+
+    public Call<CreateFilmListAPIResponse> createFilmList(FilmList newFilmList) {
+        return null;
     }
 
     public interface FilmListener {

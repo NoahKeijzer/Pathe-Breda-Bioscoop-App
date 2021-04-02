@@ -1,10 +1,11 @@
 package com.example.pathebredabioscoopapp.domain;
 
-import java.io.Serializable;
+import com.example.pathebredabioscoopapp.controller.MovieController;
+
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Films implements Serializable {
+public class Films {
     private final String TAG = getClass().getSimpleName();
     private int id;
     private int duration;
@@ -128,5 +129,9 @@ public class Films implements Serializable {
 
     public void setActors(ArrayList<Actors> actors) {
         this.actors = actors;
+    }
+
+    public Object getFullPosterPath() {
+        return MovieController.BASE_POSTER_PATH_URL + poster;
     }
 }
