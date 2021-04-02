@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pathebredabioscoopapp">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,10 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PatheBredaBioscoopApp">
-
-
         <activity
-            android:name=".ui.ExploreMoviesActivity"
+            android:name=".ui.StartScreenActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.PatheBredaBioscoopApp.NoActionBar">
             <intent-filter>
