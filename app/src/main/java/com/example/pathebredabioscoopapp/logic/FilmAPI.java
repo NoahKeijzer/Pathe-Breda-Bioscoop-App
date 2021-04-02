@@ -1,5 +1,6 @@
 package com.example.pathebredabioscoopapp.logic;
 
+
 import com.example.pathebredabioscoopapp.domain.FilmList;
 
 import retrofit2.Call;
