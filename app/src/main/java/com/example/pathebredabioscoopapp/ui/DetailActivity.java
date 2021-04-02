@@ -14,7 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pathebredabioscoopapp.domain.Films;
 
-public class DetailActivity extends AppCompatActivity {
+import java.io.Serializable;
+
+public class DetailActivity extends AppCompatActivity implements Serializable {
     private Films film;
     private TextView mTitleText;
     private ImageView mPosterImageView;
