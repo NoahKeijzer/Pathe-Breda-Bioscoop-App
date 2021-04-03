@@ -11,14 +11,24 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pathebredabioscoopapp.R;
+import com.example.pathebredabioscoopapp.controller.CreateMovieListController;
+import com.example.pathebredabioscoopapp.controller.MovieListsController;
 import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.domain.Films;
+import com.example.pathebredabioscoopapp.logic.CreateFilmListAPIResponse;
+import com.example.pathebredabioscoopapp.logic.FilmAPI;
+import com.example.pathebredabioscoopapp.logic.FilmAPIResponse;
 import com.example.pathebredabioscoopapp.logic.FilmAPITask;
 import com.example.pathebredabioscoopapp.logic.FilmAdapter;
+import com.example.pathebredabioscoopapp.ui.home.HomeAdapter;
+import com.example.pathebredabioscoopapp.controller.BaseMovieAppController;
 
 import java.util.ArrayList;
 
-public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPITask.FilmListener {
+import retrofit2.Call;
+
+public class ExploreMoviesActivity extends AppCompatActivity implements CreateMovieListController.MovieControllerListener {
     private final String TAG = getClass().getSimpleName();
     private TextView mTitleText;
     private FilmAdapter filmAdapter;
@@ -26,9 +36,18 @@ public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPIT
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<FilmList> filmList;
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.content_main);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView = findViewById(R.id.film_recycler_view);
+        recyclerView.setLayoutManager(layoutManager);
+        homeAdapter = new HomeAdapter(onFilmsListAvailable);
+        recyclerView.setAdapter(homeAdapter);
+
     }
 
     @Override
@@ -57,7 +76,8 @@ public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPIT
     }
 
     @Override
-    public void onFilmsListAvailable(ArrayList<Films> filmList) {
-
+    public void onFilmsAvailable(ArrayList<Films> movies) {
+        this.films.addAll(movies);
+        this.homeAdapter.notifyDataSetChanged();
     }
 }
