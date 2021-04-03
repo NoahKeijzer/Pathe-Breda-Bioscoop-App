@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/Background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/teal_200"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_review_title"
+            android:textSize="28dp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:minLines="1"
+            android:maxLines="6"
+            android:scrollbars="vertical"
+            android:inputType="textMultiLine"
+            android:text="@string/action_cancel"
+            android:textColor="@color/white"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_review_give_rating"
+            android:layout_gravity="center"
+            android:textSize="24dp"
+            android:textColor="@color/white"/>
+
+        <SeekBar
+            android:id="@+id/simpleSeeker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="60dp"
+            android:max="10"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_new_review_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:text="@string/new_review_submit"/>
+            <Button
+                android:id="@+id/btn_new_review_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="120dp"
+                android:text="@string/action_cancel"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</GridLayout>
