@@ -17,6 +17,7 @@
         />
 
     <TextView
+        android:id="@+id/tv_list_name"
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:text="@string/item_list_placeholder"
