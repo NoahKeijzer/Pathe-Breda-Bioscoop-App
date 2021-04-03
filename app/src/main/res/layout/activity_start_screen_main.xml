@@ -4,10 +4,11 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/Background"
+    android:background="@drawable/background"
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tv_start_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pathé Breda Movie app"
@@ -23,6 +24,7 @@
         android:orientation="vertical"
         >
         <Button
+            android:id="@+id/btn_start_personal_list"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="Personal list"
@@ -30,6 +32,7 @@
             />
 
         <Button
+            android:id="@+id/btn_start_explore_movies"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="Explore movies"

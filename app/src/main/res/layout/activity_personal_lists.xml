@@ -4,21 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/background"
-    >
+    android:background="@drawable/background">
 
     <TextView
-        android:id="@+id/tv_general_recyclerview_title"
+        android:id="@+id/tv_personal_lists_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:layout_marginTop="30dp"
-        android:layout_gravity="center"/>
-    
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rv_general_recyclerview" />
+        android:id="@+id/rv_personal_lists_recyclerview" />
 
 </LinearLayout>

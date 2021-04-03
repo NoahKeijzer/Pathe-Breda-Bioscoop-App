@@ -47,6 +47,8 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
 
        public FilmViewHolder(@NonNull View view) {
            super(view);
+
+
        }
    }
 }

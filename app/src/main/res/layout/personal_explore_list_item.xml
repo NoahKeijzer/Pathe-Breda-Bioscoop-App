@@ -95,7 +95,7 @@
                 android:layout_height="24dp"
                 android:layout_marginLeft="30dp"
                 android:layout_gravity="left"
-                android:src="@drawable/deleteIcon" />
+                android:src="@drawable/delete_icon" />
 
             <ImageView
                 android:id="@+id/iv_add_icon"
@@ -103,7 +103,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="right"
                 android:layout_marginRight="20dp"
-                android:src="@drawable/addIcon" />
+                android:src="@drawable/add_icon" />
         </GridLayout>
 
 

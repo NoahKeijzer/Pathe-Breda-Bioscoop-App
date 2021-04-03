@@ -13,7 +13,7 @@
         android:id="@+id/iv_delete_icon"
         android:layout_height="24dp"
         android:layout_width="24dp"
-        android:src="@drawable/deleteIcon"
+        android:src="@drawable/delete_icon"
         />
 
     <TextView
@@ -29,7 +29,7 @@
         android:id="@+id/iv_share_icon"
         android:layout_height="24dp"
         android:layout_width="24dp"
-        android:src="@drawable/shareIcon"
+        android:src="@drawable/share_icon"
         android:layout_marginLeft="20dp"
         />
 

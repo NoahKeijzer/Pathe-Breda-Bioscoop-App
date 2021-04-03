@@ -4,12 +4,12 @@
 
     <item
         android:id="@+id/action_filter"
-        android:icon="@drawable/Filter"
+        android:icon="@drawable/filter"
         android:title="@string/menu_filter"
         app:showAsAction="always"/>
     <item
         android:id="@+id/action_sort"
-        android:icon="@drawable/sortIcon"
+        android:icon="@drawable/sort_icon"
         android:title="@string/menu_sort"
         app:showAsAction="always"/>
 </menu>
