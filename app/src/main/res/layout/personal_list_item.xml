@@ -13,10 +13,11 @@
         android:id="@+id/iv_delete_icon"
         android:layout_height="24dp"
         android:layout_width="24dp"
-        android:src="@drawable/deleteIcon"
+        android:src="@drawable/delete_icon"
         />
 
     <TextView
+        android:id="@+id/tv_list_name"
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:text="@string/item_list_placeholder"
@@ -29,7 +30,7 @@
         android:id="@+id/iv_share_icon"
         android:layout_height="24dp"
         android:layout_width="24dp"
-        android:src="@drawable/shareIcon"
+        android:src="@drawable/share_icon"
         android:layout_marginLeft="20dp"
         />
 

@@ -4,36 +4,36 @@
 
     <item
         android:id="@+id/action_settings"
-        android:icon="@drawable/settingsIcon"
+        android:icon="@drawable/settings_icon"
         android:title="settings"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/action_delete"
-        android:icon="@drawable/deleteIcon"
+        android:icon="@drawable/delete_icon"
         android:title="delete"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/action_filter"
-        android:icon="@drawable/Filter"
+        android:icon="@drawable/filter"
         android:title="Filter"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/action_share"
-        android:icon="@drawable/shareIcon"
+        android:icon="@drawable/share_icon"
         android:title="Share"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/action_sort"
-        android:icon="@drawable/sortIcon"
+        android:icon="@drawable/sort_icon"
         android:title="sort"
         app:showAsAction="always"/>
     <item
         android:id="@+id/action_add"
-        android:icon="@drawable/addIcon"
+        android:icon="@drawable/add_icon"
         android:title="add"
         app:showAsAction="always"/>
 

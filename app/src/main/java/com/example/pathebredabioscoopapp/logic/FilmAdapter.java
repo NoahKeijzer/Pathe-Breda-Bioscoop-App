@@ -26,7 +26,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
     private List<Films> filmList;
 
     public FilmAdapter(List filmList){
-        Log.d(TAG, "Adapter constructor is aangeroepen.");
+        Log.d(TAG, "FilmAdapter constructor is aangeroepen.");
         this.filmList = filmList;
     }
 
@@ -37,15 +37,12 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
 
         Context context = parent.getContext();
 
-        //Hier moet het item nog ingevuld worden.
-
-        /*int layoutIdForListItem = R.layout.;
+        int layoutIdForListItem = R.layout.personal_explore_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
 
         View view = inflater.inflate(layoutIdForListItem, parent, shouldAttachToParentImmediately);
-        return new FilmViewHolder(view);*/
-        return null;
+        return new FilmViewHolder(view);
     }
 
     @Override
@@ -81,22 +78,22 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
         private TextView mGenreText;
         private TextView mReleaseText;
         private TextView mLengthText;
-        private Button mDeleteButton;
-        private Button mAddButton;
+        private ImageView mDeleteButton;
+        private ImageView mAddButton;
 
        public FilmViewHolder(@NonNull View view) {
            super(view);
 
            Log.d(TAG, "ViewHolder constructor is aangeroepen.");
 
-           /*mFilmImage = (ImageView) itemView.findViewById(R.id.character_list_item_name);
-           mTitleText = (TextView) itemView.findViewById(R.id.character_list_item_nickname);
-           mRatingText = (TextView) itemView.findViewById(R.id.character_list_item_status);
-           mGenreText = (TextView) itemView.findViewById(R.id.character_list_item_nickname);
-           mReleaseText = (TextView) itemView.findViewById(R.id.character_list_item_status);
-           mLengthText = (TextView) itemView.findViewById(R.id.character_list_item_name);
-           mDeleteButton = (Button) itemView.findViewById();
-           mAddButton = (Button) itemView.findViewById();*/
+           mFilmImage = (ImageView) itemView.findViewById(R.id.iv_poster_image);
+           mTitleText = (TextView) itemView.findViewById(R.id.tv_movie_title);
+           mRatingText = (TextView) itemView.findViewById(R.id.tv_movie_rating);
+           mGenreText = (TextView) itemView.findViewById(R.id.tv_movie_genre);
+           mReleaseText = (TextView) itemView.findViewById(R.id.tv_movie_release_year);
+           mLengthText = (TextView) itemView.findViewById(R.id.tv_movie_length);
+           mDeleteButton = (ImageView) itemView.findViewById(R.id.iv_delete_icon);
+           mAddButton = (ImageView) itemView.findViewById(R.id.iv_add_icon);
 
            itemView.setOnClickListener(new View.OnClickListener() {
 
@@ -126,7 +123,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
                }
            });
 
-           mDeleteButton.setOnClickListener(new View.OnClickListener() {
+           /*mDeleteButton.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v){
                    Log.d(TAG, "onClick() van een delete button is aangeroepen.");
@@ -163,7 +160,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
 
 
                }
-           });
+           });*/
        }
    }
 }

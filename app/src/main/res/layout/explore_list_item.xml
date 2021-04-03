@@ -87,7 +87,7 @@
             android:id="@+id/iv_add_icon"
             android:layout_height="24dp"
             android:layout_width="24dp"
-            android:src="@drawable/addIcon"
+            android:src="@drawable/add_icon"
             android:layout_marginLeft="20dp"
             android:layout_gravity="right"/>
     </LinearLayout>

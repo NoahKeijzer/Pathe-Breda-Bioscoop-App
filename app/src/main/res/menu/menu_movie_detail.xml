@@ -4,12 +4,12 @@
 
     <item
         android:id="@+id/action_add"
-        android:icon="@drawable/addIcon"
+        android:icon="@drawable/add_icon"
         android:title="@string/menu_add"
         app:showAsAction="always"/>
     <item
         android:id="@+id/action_share"
-        android:icon="@drawable/shareIcon"
+        android:icon="@drawable/share_icon"
         android:title="@string/menu_share"
         app:showAsAction="always"/>
 </menu>
