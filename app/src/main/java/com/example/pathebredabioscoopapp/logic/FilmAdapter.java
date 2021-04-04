@@ -58,7 +58,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
         holder.mReleaseText.setText(String.valueOf(film.getReleaseDate()));
         holder.mLengthText.setText(String.valueOf(film.getDuration()));
         String fullPath = BASE_POSTER_PATH_URL + film.getPoster();
-        Picasso.get().load(fullPath).resize(250, 250).into(holder.mFilmImage);
+        Picasso.get().load(fullPath).resize(250, 310).into(holder.mFilmImage);
     }
 
     @Override
@@ -98,30 +98,21 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
            mAddButton = (ImageView) itemView.findViewById(R.id.iv_add_icon);
 
            itemView.setOnClickListener(new View.OnClickListener() {
-
                @Override
                public void onClick(View v) {
-
                    Log.d(TAG, "onClick() van een view is aangeroepen.");
-
                    int position = 1;
-
                    for (Films movie : filmList) {
                        if (mTitleText.getText().toString().equals(movie.getTitle())) {
                            position = filmList.indexOf(movie);
                        }
                    }
-
                    Films film = filmList.get(position);
-
                    Context context = v.getContext();
                    Class destinationActivity = DetailActivity.class;
-
-                   Intent startChildActivityIntent = new Intent(context, destinationActivity);
-
-                   startChildActivityIntent.putExtra("EXTRA_NAME", film);
-
-                   context.startActivity(startChildActivityIntent);
+                   Intent startActivity = new Intent(context, destinationActivity);
+                   startActivity.putExtra("FILM_NAME", film);
+                   context.startActivity(startActivity);
                }
            });
 

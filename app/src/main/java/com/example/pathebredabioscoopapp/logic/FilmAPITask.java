@@ -27,9 +27,15 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> imple
     private final String TAG = getClass().getSimpleName();
     private JSONConverter jsonConverter;
     private FilmListener filmListener;
+    private int id = 0;
 
     public FilmAPITask(FilmListener filmListener) {
         this.filmListener = filmListener;
+    }
+
+    public FilmAPITask(FilmListener filmListener, int id) {
+        this.filmListener = filmListener;
+        this.id = id;
     }
 
     public String stringRequestAllMovies() {
@@ -48,15 +54,24 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> imple
         return BASE_URL + "movie/" + id + "?api_key=" + API_KEY + "&language=en-US";
     }
 
+    public String stringRequestAllPersonalMovies(int id) {
+        return BASE_URL + "list/" + id + "?api_key=" + API_KEY + "&language=en-US&page=1";
+    }
+
     @Override
     protected ArrayList<Films> doInBackground(String... strings) {
         Log.d(TAG, "doInBackground is aangeroepen");
+        ArrayList<Films> resultList = new ArrayList<>();
         //Create/get URL
         HttpURLConnection urlConnection = null;
         URL urlGetMovie = null;
 
         try {
-            urlGetMovie = new URL(stringRequestAllMovies());
+            if(id == 0){
+                urlGetMovie = new URL(stringRequestAllMovies());
+            }else{
+                urlGetMovie = new URL(stringRequestAllPersonalMovies(id));
+            }
             //Request bouwen en versturen
             urlConnection = (HttpURLConnection) urlGetMovie.openConnection();
             InputStream in = urlConnection.getInputStream();
@@ -68,7 +83,11 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> imple
                 String response = scanner.next();
                 Log.d(TAG, "response: " + response);
                 jsonConverter = new JSONConverter(response);
-                ArrayList<Films> resultList = jsonConverter.convertFilm();
+                if(id == 0){
+                    resultList = jsonConverter.convertFilm();
+                }else{
+                    resultList = jsonConverter.convertPersonalList();
+                }
                 getDetailsFilm(resultList);
                 getActorsFilm(resultList);
                 return resultList;

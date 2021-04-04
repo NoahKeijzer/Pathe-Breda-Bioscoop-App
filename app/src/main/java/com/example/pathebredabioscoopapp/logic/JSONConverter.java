@@ -102,6 +102,33 @@ public class JSONConverter implements Serializable {
         return results;
     }
 
+    public ArrayList<Films> convertPersonalList() {
+        Log.d(TAG, "convertJsonToArrayList is aangeroepen");
+        ArrayList<Films> results = new ArrayList<>();
+
+        try {
+            JSONObject filmsResult = new JSONObject(response);
+            JSONArray filmsList = filmsResult.getJSONArray("items");
+
+            for (int i = 0; i < filmsList.length(); i++) {
+
+                JSONObject film = filmsList.getJSONObject(i);
+                int id = film.getInt(ID_FILM);
+                String overview = film.getString(OVERVIEW_FILM);
+                String imgUrl = film.getString(POSTER_PATH);
+                String release = film.getString(RELEASE_DATE);
+                String title = film.getString(TITLE_FILM);
+                double rating = film.getDouble(RATING_FILM);
+
+                results.add(new Films(id, title, imgUrl, overview, release, rating));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+
     public String convertGenreFilm() {
         Log.d(TAG, "convertJsonToArrayList Genre is aangeroepen");
         String genre = "";
