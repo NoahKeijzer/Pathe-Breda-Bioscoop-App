@@ -15,30 +15,34 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pathebredabioscoopapp.R;
 import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.domain.Films;
+import com.example.pathebredabioscoopapp.logic.FilmAPI;
 import com.example.pathebredabioscoopapp.logic.FilmAPITask;
 import com.example.pathebredabioscoopapp.logic.FilmAdapter;
 
 import java.util.ArrayList;
 
-public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPITask.FilmListener {
+/*import retrofit2.Call;*/
+
+public class ExploreMoviesActivity extends AppCompatActivity{
     private final String TAG = getClass().getSimpleName();
     private TextView mTitleText;
     private FilmAdapter filmAdapter;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<Films> filmList;
+    private ArrayList<FilmList> filmList;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.explore_movies);
-        recyclerView = findViewById(R.id.recycler_view);
+        setContentView(R.layout.activity_recycler_view);
         layoutManager = new LinearLayoutManager(this);
+        recyclerView = findViewById(R.id.rv_general_recyclerview);
         recyclerView.setLayoutManager(layoutManager);
         filmAdapter = new FilmAdapter(filmList);
         recyclerView.setAdapter(filmAdapter);
 
-        new FilmAPITask(this::onFilmsListAvailable).execute();
+        new FilmAPITask(this).execute();
 
     }
 
@@ -67,9 +71,8 @@ public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPIT
         super.onRestoreInstanceState(savedInstanceState);
     }
 
-    @Override
-    public void onFilmsListAvailable(ArrayList<Films> filmList) {
-        this.filmList.addAll(filmList);
-        filmAdapter.notifyDataSetChanged();
+    public void onFilmsAvailable(ArrayList<FilmList> movies) {
+        this.filmList.addAll(movies);
+        this.filmAdapter.notifyDataSetChanged();
     }
 }

@@ -4,17 +4,42 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.pathebredabioscoopapp.R;
+
+import org.w3c.dom.Text;
+
 public class NewReviewActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
+    private TextView mNewReviewTitle;
+    private TextView mGiveRating;
+    private EditText mNewReviewDescription;
+    private SeekBar mRatingSeekbar;
+    private Button mSubmit;
+    private Button mCancel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_new_review);
+        mNewReviewTitle = findViewById(R.id.tv_new_review_title);
+        mNewReviewTitle.setText("New Review");
+
+        mNewReviewDescription = findViewById(R.id.et_review_description);
+        mGiveRating = findViewById(R.id.tv_give_rating_title);
+        mRatingSeekbar = findViewById(R.id.simpleSeeker);
+        mSubmit = findViewById(R.id.btn_new_review_submit);
+        mCancel = findViewById(R.id.btn_new_review_cancel);
+
+
     }
 
     @Override

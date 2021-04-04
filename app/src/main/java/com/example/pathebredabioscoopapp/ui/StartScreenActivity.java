@@ -1,7 +1,5 @@
 package com.example.pathebredabioscoopapp.ui;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
@@ -36,51 +34,13 @@ public class StartScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_start_screen_main);
 
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        mButtonExploreMovies = (Button) findViewById(R.id.button_explore_film_list);
-        mButtonExploreMovies.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = v.getContext();
-                Intent intent = new Intent(context, ExploreMoviesActivity.class);
-                context.startActivity(intent);
-            }
-        });
+        mTitle = findViewById(R.id.tv_start_title);
+        mButtonPersonalList = findViewById(R.id.btn_start_personal_list);
+        mButtonExploreMovies = findViewById(R.id.btn_start_explore_movies);
 
 
-        mButtonPersonalList = (Button) findViewById(R.id.button_personal_list);
-        mButtonPersonalList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = v.getContext();
-                Intent intent = new Intent(context, PersonalListActivity.class);
-                context.startActivity(intent);
-            }
-        });
-        mButtonExploreMovies = (Button) findViewById(R.id.button_explore_film_list);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
     }
 
     @Override

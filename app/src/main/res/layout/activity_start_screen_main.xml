@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_start_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pathé Breda Movie app"
+        android:textColor="#FFFFFF"
+        android:textSize="26dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        >
+        <Button
+            android:id="@+id/btn_start_personal_list"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Personal list"
+            android:layout_marginTop="60dp"
+            />
+
+        <Button
+            android:id="@+id/btn_start_explore_movies"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Explore movies"
+            android:layout_marginTop="30dp"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
