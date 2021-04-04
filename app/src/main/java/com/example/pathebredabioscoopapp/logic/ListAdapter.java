@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pathebredabioscoopapp.R;
 import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.ui.DetailActivity;
+import com.example.pathebredabioscoopapp.ui.PersonalListActivity;
 
 import java.util.List;
 
@@ -78,14 +79,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             mShareButton = (ImageView) itemView.findViewById(R.id.iv_share_icon);
 
             itemView.setOnClickListener(new View.OnClickListener() {
-
                 @Override
                 public void onClick(View v) {
-
                     Log.d(TAG, "onClick() van een view is aangeroepen.");
-
                     int position = 1;
-
                     for (FilmList personalList : list) {
                         if (mListName.getText().toString().equals(personalList.getName())) {
                             position = list.indexOf(personalList);
@@ -93,14 +90,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
                     }
 
                     FilmList filmList = list.get(position);
-
                     Context context = v.getContext();
-                    Class destinationActivity = DetailActivity.class;
-
+                    Class destinationActivity = PersonalListActivity.class;
                     Intent startChildActivityIntent = new Intent(context, destinationActivity);
-
-                    startChildActivityIntent.putExtra("EXTRA_NAME", mListName.toString());
-
+                    startChildActivityIntent.putExtra("EXTRA_NAME",  filmList);
                     context.startActivity(startChildActivityIntent);
                 }
             });

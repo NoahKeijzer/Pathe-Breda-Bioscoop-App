@@ -29,6 +29,9 @@
         <activity android:name=".ui.AllListsActivity">
 
         </activity>
+        <activity android:name=".ui.PersonalListActivity">
+
+        </activity>
     </application>
 
 </manifest>

@@ -83,8 +83,6 @@ public class JSONConverter {
         return filmLists;
     }
 
-
-
     public ArrayList<Films> convertFilm() {
         Log.d(TAG, "convertJsonToArrayList is aangeroepen");
         ArrayList<Films> results = new ArrayList<>();
