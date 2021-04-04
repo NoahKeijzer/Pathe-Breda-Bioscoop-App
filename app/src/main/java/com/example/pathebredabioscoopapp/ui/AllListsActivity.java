@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pathebredabioscoopapp.domain.Reviews;
+
 import java.util.ArrayList;
 
 public class AllListsActivity extends AppCompatActivity {

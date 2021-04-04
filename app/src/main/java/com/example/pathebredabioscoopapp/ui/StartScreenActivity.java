@@ -1,5 +1,7 @@
 package com.example.pathebredabioscoopapp.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
@@ -47,6 +49,27 @@ public class StartScreenActivity extends AppCompatActivity {
             }
         });
 
+        mButtonExploreMovies = (Button) findViewById(R.id.button_explore_film_list);
+        mButtonExploreMovies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, ExploreMoviesActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+
+        mButtonPersonalList = (Button) findViewById(R.id.button_personal_list);
+        mButtonPersonalList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, PersonalListActivity.class);
+                context.startActivity(intent);
+            }
+        });
+        mButtonExploreMovies = (Button) findViewById(R.id.button_explore_film_list);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

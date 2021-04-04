@@ -3,14 +3,14 @@ package com.example.pathebredabioscoopapp.domain;
 public class Actors {
     private final String TAG = getClass().getSimpleName();
     private int id;
-    private String firstName;
-    private String lastName;
+    private String name;
+    private String character;
     private String picture;
 
-    public Actors(int id, String firstName, String lastName, String picture) {
+    public Actors(int id, String name, String character, String picture) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
+        this.character = character;
         this.picture = picture;
     }
 
@@ -22,24 +22,24 @@ public class Actors {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getPicture() {
         return picture;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(String character) {
+        this.character = character;
     }
 
     public void setPicture(String picture) {
