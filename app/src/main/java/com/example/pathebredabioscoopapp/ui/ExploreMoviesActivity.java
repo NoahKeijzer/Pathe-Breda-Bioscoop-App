@@ -35,12 +35,14 @@ public class ExploreMoviesActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_main);
+        setContentView(R.layout.activity_recycler_view);
         layoutManager = new LinearLayoutManager(this);
         recyclerView = findViewById(R.id.rv_general_recyclerview);
         recyclerView.setLayoutManager(layoutManager);
         filmAdapter = new FilmAdapter(filmList);
         recyclerView.setAdapter(filmAdapter);
+
+        new FilmAPITask(this).execute();
 
     }
 
