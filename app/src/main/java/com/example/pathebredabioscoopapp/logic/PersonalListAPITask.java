@@ -146,5 +146,7 @@ public class PersonalListAPITask extends AsyncTask<String, Void, ArrayList<Films
             }
         }
     }
+
+    
 }
 
