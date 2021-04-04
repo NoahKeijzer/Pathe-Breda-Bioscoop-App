@@ -162,6 +162,8 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> imple
     @Override
     protected void onPostExecute(ArrayList<Films> films) {
         super.onPostExecute(films);
+        filmListener.onFilmsListAvailable(films);
+
     }
 
     public interface FilmListener {

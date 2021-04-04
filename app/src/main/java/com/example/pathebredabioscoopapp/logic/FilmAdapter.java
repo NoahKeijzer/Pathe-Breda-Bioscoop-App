@@ -24,6 +24,7 @@ import java.util.List;
 public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder> implements Serializable {
     private final String TAG = getClass().getSimpleName();
     private List<Films> filmList;
+    public static final String BASE_POSTER_PATH_URL = "https://image.tmdb.org/t/p/w500";
 
     public FilmAdapter(List filmList){
         Log.d(TAG, "FilmAdapter constructor is aangeroepen.");
@@ -37,7 +38,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
 
         Context context = parent.getContext();
 
-        int layoutIdForListItem = R.layout.personal_explore_list_item;
+        int layoutIdForListItem = R.layout.explore_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
 
@@ -51,12 +52,13 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
 
         Films film = filmList.get(position);
 
-        holder.mTitleText.setText(film.getTitle());
-        holder.mRatingText.setText("Rating: " + film.getRating());
-        holder.mGenreText.setText("Genre: " + film.getGenre());
-        holder.mReleaseText.setText("Release date: " + film.getReleaseDate());
-        holder.mLengthText.setText("Duration: " + film.getDuration());
-        Picasso.get().load(film.getPoster()).resize(250, 250).into(holder.mFilmImage);
+        holder.mTitleText.setText(String.valueOf(film.getTitle()));
+        holder.mRatingText.setText(String.valueOf(film.getRating()));
+        holder.mGenreText.setText(String.valueOf(film.getGenre()));
+        holder.mReleaseText.setText(String.valueOf(film.getReleaseDate()));
+        holder.mLengthText.setText(String.valueOf(film.getDuration()));
+        String fullPath = BASE_POSTER_PATH_URL + film.getPoster();
+        Picasso.get().load(fullPath).resize(250, 250).into(holder.mFilmImage);
     }
 
     @Override

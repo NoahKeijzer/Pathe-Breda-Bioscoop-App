@@ -75,6 +75,30 @@ public class JSONConverter implements Serializable {
         return filmLists;
     }
 
+    public ArrayList<FilmList> convertFilmList() {
+        ArrayList<FilmList> filmLists = new ArrayList<>();
+
+        try {
+            JSONObject responseObject = new JSONObject(response);
+            JSONArray responseResultSet = responseObject.getJSONArray(delimterResults);
+
+            for (int s = 0; s < responseResultSet.length(); s++) {
+                JSONObject resultSetObject = responseResultSet.getJSONObject(s);
+                int id = resultSetObject.getInt(JSON_FILMLIST_ID);
+                String name = resultSetObject.getString(JSON_FILMLIST_NAME);
+                ArrayList<Films> filmList = new ArrayList<>();
+
+                filmLists.add(new FilmList(id, name, filmList));
+            }
+        } catch (JSONException e) {
+            Log.d(TAG, "Geen JSON object");
+            e.printStackTrace();
+        }
+        return filmLists;
+    }
+
+
+
     public ArrayList<Films> convertFilm() {
         Log.d(TAG, "convertJsonToArrayList is aangeroepen");
         ArrayList<Films> results = new ArrayList<>();
@@ -86,12 +110,13 @@ public class JSONConverter implements Serializable {
             for (int i = 0; i < filmsList.length(); i++) {
 
                 JSONObject film = filmsList.getJSONObject(i);
+                int id = film.getInt(ID_FILM);
                 String title = film.getString(TITLE_FILM);
-                String imgUrl = film.getString(POSTER_PATH);
                 String overview = film.getString(OVERVIEW_FILM);
+                String imgUrl = film.getString(POSTER_PATH);
                 String release = film.getString(RELEASE_DATE);
                 double rating = film.getDouble(RATING_FILM);
-                int id = film.getInt(ID_FILM);
+
                 results.add(new Films(id, title, imgUrl, overview, release, rating));
             }
 

@@ -16,6 +16,8 @@ public class ReviewActivity extends AppCompatActivity implements ReviewsAPITask.
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         new ReviewsAPITask(this::onReviewAvailable).execute();
     }
 

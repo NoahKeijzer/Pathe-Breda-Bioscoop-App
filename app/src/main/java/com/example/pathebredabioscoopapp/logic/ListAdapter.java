@@ -66,7 +66,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     public class ListViewHolder extends RecyclerView.ViewHolder {
         private TextView mListName;
         private ImageView mDeleteButton;
-        private ImageView mAddButton;
+        private ImageView mShareButton;
 
         public ListViewHolder(@NonNull View view) {
             super(view);
@@ -75,7 +75,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
 
             mListName = (TextView) itemView.findViewById(R.id.tv_list_name);
             mDeleteButton = (ImageView) itemView.findViewById(R.id.iv_delete_icon);
-            mAddButton = (ImageView) itemView.findViewById(R.id.iv_add_icon);
+            mShareButton = (ImageView) itemView.findViewById(R.id.iv_share_icon);
 
             itemView.setOnClickListener(new View.OnClickListener() {
 
