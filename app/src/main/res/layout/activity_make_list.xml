@@ -53,30 +53,14 @@
             android:layout_marginLeft="30dp"
             android:layout_marginBottom="10dp"/>
 
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <RadioButton
-                android:id="@+id/radio_private_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/private_list"
-                android:layout_marginLeft="30dp"/>
-            <RadioButton
-                android:id="@+id/radio_public_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/public_list"
-                android:layout_marginLeft="70dp"/>
-        </RadioGroup>
         <Spinner
             android:id="@+id/sp_sort_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:spinnerMode="dropdown"
-            android:layout_marginBottom="30dp">
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="40dp">
         </Spinner>
     </LinearLayout>
 
@@ -88,13 +72,13 @@
         android:layout_marginTop="40dp">
 
        <Button
-           android:id="@+id/bt_save_list"
+           android:id="@+id/btn_save_list"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="@string/action_save"/>
 
         <Button
-            android:id="@+id/bt_cancel_list"
+            android:id="@+id/btn_cancel_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/action_cancel"

@@ -32,7 +32,6 @@ public class ExploreMoviesActivity extends AppCompatActivity{
     private ArrayList<FilmList> filmList;
 
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

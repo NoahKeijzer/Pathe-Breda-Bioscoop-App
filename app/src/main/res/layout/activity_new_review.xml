@@ -17,22 +17,24 @@
         android:layout_marginRight="30dp">
 
         <TextView
+            android:id="@+id/tv_new_review_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/new_review_title"
+            android:text=""
             android:textSize="28dp"
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"/>
 
         <EditText
+            android:id="@+id/et_review_description"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:minLines="1"
             android:maxLines="6"
             android:scrollbars="vertical"
             android:inputType="textMultiLine"
-            android:text="@string/action_cancel"
+            android:text=""
             android:textColor="@color/white"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="40dp"
@@ -40,6 +42,7 @@
             android:layout_marginRight="10dp"/>
 
         <TextView
+            android:id="@+id/tv_give_rating_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/new_review_give_rating"
@@ -71,7 +74,7 @@
                 android:id="@+id/btn_new_review_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="120dp"
+                android:layout_marginLeft="100dp"
                 android:text="@string/action_cancel"/>
 
         </LinearLayout>

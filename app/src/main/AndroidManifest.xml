@@ -14,7 +14,7 @@
 
 
         <activity
-            android:name=".ui.AllListsActivity"
+            android:name=".ui.NewReviewActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.PatheBredaBioscoopApp.NoActionBar">
             <intent-filter>

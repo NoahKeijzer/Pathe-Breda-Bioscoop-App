@@ -28,9 +28,8 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> {
     @Override
     protected ArrayList<Films> doInBackground(String... strings) {
         return null;
-
     }
-
+    
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -41,9 +40,6 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> {
         super.onPostExecute(film);
     }
 
-    public Call<CreateFilmListAPIResponse> createFilmList(FilmList newFilmList) {
-        return null;
-    }
 
     public interface FilmListener {
        void onFilmsListAvailable(ArrayList<Films> filmList);

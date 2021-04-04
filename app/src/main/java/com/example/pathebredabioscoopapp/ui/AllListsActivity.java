@@ -16,6 +16,7 @@ import com.example.pathebredabioscoopapp.R;
 import com.example.pathebredabioscoopapp.domain.*;
 import com.example.pathebredabioscoopapp.logic.FilmAdapter;
 import com.example.pathebredabioscoopapp.logic.FilmListAPITask;
+import com.example.pathebredabioscoopapp.logic.ListAdapter;
 
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ public class AllListsActivity extends AppCompatActivity implements FilmListAPITa
     private TextView mTitleText;
     private ArrayList<FilmList> filmList = new ArrayList<>();
     private RecyclerView personalListRecyclerView;
-    private FilmAdapter personalListAdapter;
+    private ListAdapter personalListAdapter;
 
 
     @Override
@@ -38,7 +39,7 @@ public class AllListsActivity extends AppCompatActivity implements FilmListAPITa
         layoutManager = new LinearLayoutManager(this);
         personalListRecyclerView = findViewById(R.id.rv_personal_lists_recyclerview);
         personalListRecyclerView.setLayoutManager(layoutManager);
-        personalListAdapter = new FilmAdapter(filmList);
+        personalListAdapter = new ListAdapter(filmList);
         personalListRecyclerView.setAdapter(personalListAdapter);
 
         new FilmListAPITask(this).execute();
