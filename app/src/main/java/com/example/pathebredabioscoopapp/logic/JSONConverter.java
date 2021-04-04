@@ -24,6 +24,8 @@ public class JSONConverter {
     private static final String RELEASE_DATE = "release_date";
     private static final String RATING_FILM = "vote_average";
     private static final String GENRE_FILM = "name";
+    private static final String DURATION_FILM = "runtime";
+    private static final String TRAILER_FILM = "homepage";
     private static final String ACTOR_NAME = "name";
     private static final String ACTOR_PICTURE = "profile_path";
     private static final String ACTOR_CHARACTER = "character";
@@ -35,8 +37,8 @@ public class JSONConverter {
     private static final String REVIEW_ID = "id";
     private static final String REVIEW_RATING = "rating";
     private String url_details = "https://api.themoviedb.org/3/movie/" + ID_FILM + "464052?api_key=90104c23f74fdca587142d076b5df361&language=en-US";
-    private String url_review ="https://api.themoviedb.org/3/movie/"+ ID_FILM + "/reviews?api_key=90104c23f74fdca587142d076b5df361&language=en-US&page=1";
-    private String url_cast = "https://api.themoviedb.org/3/movie/"+ ID_FILM + "399566/credits?api_key=90104c23f74fdca587142d076b5df361&language=en-US";
+    private String url_review = "https://api.themoviedb.org/3/movie/" + ID_FILM + "/reviews?api_key=90104c23f74fdca587142d076b5df361&language=en-US&page=1";
+    private String url_cast = "https://api.themoviedb.org/3/movie/" + ID_FILM + "399566/credits?api_key=90104c23f74fdca587142d076b5df361&language=en-US";
 
     ArrayList<Reviews> reviews;
 
@@ -45,11 +47,11 @@ public class JSONConverter {
     private String director;
     private String trailer;
 
-    public JSONConverter(String response){
+    public JSONConverter(String response) {
         this.response = response;
     }
 
-    public ArrayList<Films> convertMovieList(){
+    public ArrayList<Films> convertMovieList() {
         return null;
     }
 
@@ -117,7 +119,6 @@ public class JSONConverter {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return actors;
     }
 
@@ -142,6 +143,47 @@ public class JSONConverter {
             e.printStackTrace();
         }
         return reviews;
+    }
+
+    public String convertDirectorFilm() {
+        String nameDirector = "";
+        try {
+            JSONObject actorsResult = new JSONObject(response);
+            JSONArray crewList = actorsResult.getJSONArray("crew");
+
+            for (int i = 0; i < crewList.length(); i++) {
+                JSONObject actorsJSON = crewList.getJSONObject(i);
+                String job = actorsJSON.getString("job");
+                if (job.equals("Director")) {
+                    nameDirector =  actorsJSON.getString("name");
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return nameDirector;
+    }
+
+    public int convertDuration(){
+        int duration = 0;
+        try {
+            JSONObject genreResult = new JSONObject(response);
+            duration =genreResult.getInt(DURATION_FILM);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return duration;
+    }
+
+    public String convertTrailer(){
+        String trailer = "";
+        try {
+            JSONObject trailerResult = new JSONObject(response);
+            trailer = trailerResult.getString(TRAILER_FILM);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return trailer;
     }
 }
 
