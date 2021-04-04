@@ -1,10 +1,9 @@
 package com.example.pathebredabioscoopapp.domain;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Films implements Serializable {
+public class Films {
     private final String TAG = getClass().getSimpleName();
     private int id;
     private int duration;
@@ -19,19 +18,13 @@ public class Films implements Serializable {
     private ArrayList<Reviews> reviews;
     private ArrayList<Actors> actors;
 
-    public Films(int id, int duration, double rating, String title, String description, String genre, String poster, String director, String trailer, Date releaseDate, ArrayList<Reviews> reviews, ArrayList<Actors> actors) {
+    public Films(int id, String title, String imgUrl, String overview, String release, double rating) {
         this.id = id;
-        this.duration = duration;
         this.rating = rating;
+        this.poster = poster;
         this.title = title;
         this.description = description;
-        this.genre = genre;
-        this.poster = poster;
-        this.director = director;
-        this.trailer = trailer;
         this.releaseDate = releaseDate;
-        this.reviews = reviews;
-        this.actors = actors;
     }
 
     public int getId() {
@@ -129,4 +122,5 @@ public class Films implements Serializable {
     public void setActors(ArrayList<Actors> actors) {
         this.actors = actors;
     }
-}
+    }
+
