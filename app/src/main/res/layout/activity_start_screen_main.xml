@@ -36,6 +36,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="Explore movies"
+
             android:layout_marginTop="30dp"
             />
     </LinearLayout>

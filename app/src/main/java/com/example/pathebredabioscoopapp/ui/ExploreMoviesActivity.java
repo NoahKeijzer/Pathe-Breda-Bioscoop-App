@@ -19,17 +19,18 @@ import com.example.pathebredabioscoopapp.logic.FilmAPI;
 import com.example.pathebredabioscoopapp.logic.FilmAPITask;
 import com.example.pathebredabioscoopapp.logic.FilmAdapter;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /*import retrofit2.Call;*/
 
-public class ExploreMoviesActivity extends AppCompatActivity{
+public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPITask.FilmListener{
     private final String TAG = getClass().getSimpleName();
     private TextView mTitleText;
     private FilmAdapter filmAdapter;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<FilmList> filmList;
+    private ArrayList<Films> filmList = new ArrayList<>();
 
 
     @Override
@@ -37,12 +38,14 @@ public class ExploreMoviesActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view);
         layoutManager = new LinearLayoutManager(this);
+        mTitleText = findViewById(R.id.tv_general_recyclerview_title);
+        mTitleText.setText("Populair movies");
         recyclerView = findViewById(R.id.rv_general_recyclerview);
         recyclerView.setLayoutManager(layoutManager);
         filmAdapter = new FilmAdapter(filmList);
         recyclerView.setAdapter(filmAdapter);
 
-        new FilmAPITask(this).execute();
+       new FilmAPITask(this).execute();
 
     }
 
@@ -71,8 +74,9 @@ public class ExploreMoviesActivity extends AppCompatActivity{
         super.onRestoreInstanceState(savedInstanceState);
     }
 
-    public void onFilmsAvailable(ArrayList<FilmList> movies) {
-        this.filmList.addAll(movies);
+    @Override
+    public void onFilmsListAvailable(ArrayList<Films> filmList) {
+        this.filmList.addAll(filmList);
         this.filmAdapter.notifyDataSetChanged();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.pathebredabioscoopapp.ui;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
@@ -39,6 +40,21 @@ public class StartScreenActivity extends AppCompatActivity {
         mTitle = findViewById(R.id.tv_start_title);
         mButtonPersonalList = findViewById(R.id.btn_start_personal_list);
         mButtonExploreMovies = findViewById(R.id.btn_start_explore_movies);
+
+        mButtonPersonalList.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(StartScreenActivity.this, AllListsActivity.class));
+            }
+        });
+
+
+        mButtonExploreMovies.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(StartScreenActivity.this, ExploreMoviesActivity.class));
+            }
+        });
 
 
     }

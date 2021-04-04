@@ -14,7 +14,7 @@
 
 
         <activity
-            android:name=".ui.ReviewActivity"
+            android:name=".ui.StartScreenActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.PatheBredaBioscoopApp.NoActionBar">
             <intent-filter>
@@ -26,7 +26,7 @@
         <activity android:name=".ui.ExploreMoviesActivity">
 
         </activity>
-        <activity android:name=".ui.PersonalListActivity">
+        <activity android:name=".ui.AllListsActivity">
 
         </activity>
     </application>

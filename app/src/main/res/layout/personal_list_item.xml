@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:columnCount="1"
-    android:background="@color/teal_200"
-    android:padding="18dp"
-    >
+    android:background="@drawable/customborder"
+    android:padding="18dp">
 
     <ImageView
         android:id="@+id/iv_delete_icon"
@@ -18,7 +17,7 @@
 
     <TextView
         android:id="@+id/tv_list_name"
-        android:layout_width="300dp"
+        android:layout_width="260dp"
         android:layout_height="match_parent"
         android:text="@string/item_list_placeholder"
         android:fontFamily="monospace"
@@ -31,8 +30,7 @@
         android:layout_height="24dp"
         android:layout_width="24dp"
         android:src="@drawable/share_icon"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         />
-
 
 </LinearLayout>
