@@ -45,7 +45,7 @@ public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPIT
         filmAdapter = new FilmAdapter(filmList);
         recyclerView.setAdapter(filmAdapter);
 
-       new FilmAPITask(this).execute();
+        new FilmAPITask(this).execute();
 
     }
 

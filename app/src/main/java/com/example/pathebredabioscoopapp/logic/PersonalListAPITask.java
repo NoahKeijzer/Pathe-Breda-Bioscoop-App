@@ -4,9 +4,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.pathebredabioscoopapp.domain.Actors;
-import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.domain.Films;
-import com.example.pathebredabioscoopapp.domain.Reviews;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,27 +15,18 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import retrofit2.Call;
+import static com.example.pathebredabioscoopapp.logic.FilmAPITask.API_KEY;
+import static com.example.pathebredabioscoopapp.logic.FilmAPITask.BASE_URL;
 
-public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> implements Serializable {
-    public static final String API_KEY = "90104c23f74fdca587142d076b5df361";
-    public static final String BASE_URL = "https://api.themoviedb.org/3/";
-    public static final String BASE_POSTER_PATH_URL = "https://image.tmdb.org/t/p/w500";
-    public static final String SESSION_ID = "db55b43e42578d56dabbe2e110797041090fc6e7";
+public class PersonalListAPITask extends AsyncTask<String, Void, ArrayList<Films>> implements Serializable {
     private final String TAG = getClass().getSimpleName();
     private JSONConverter jsonConverter;
-    private FilmListener filmListener;
+    private FilmAPITask.FilmListener filmListener;
+    private int id;
 
-    public FilmAPITask(FilmListener filmListener) {
+    public PersonalListAPITask(FilmAPITask.FilmListener filmListener, int id) {
         this.filmListener = filmListener;
-    }
-
-    public String stringRequestAllMovies() {
-        return BASE_URL + "movie/popular?api_key=" + API_KEY + "&language=en-US&page=1";
-    }
-
-    public String stringRequestTrendingMovies() {
-        return BASE_URL + "trending/movie/week?api_key=" + API_KEY;
+        this.id = id;
     }
 
     public String stringRequestActorsFilm(int id) {
@@ -48,6 +37,10 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> imple
         return BASE_URL + "movie/" + id + "?api_key=" + API_KEY + "&language=en-US";
     }
 
+    public String stringRequestAllMovies(int id) {
+        return BASE_URL + "list/" + id + "?api_key=" + API_KEY + "&language=en-US&page=1";
+    }
+
     @Override
     protected ArrayList<Films> doInBackground(String... strings) {
         Log.d(TAG, "doInBackground is aangeroepen");
@@ -56,7 +49,7 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> imple
         URL urlGetMovie = null;
 
         try {
-            urlGetMovie = new URL(stringRequestAllMovies());
+            urlGetMovie = new URL(stringRequestAllMovies(id));
             //Request bouwen en versturen
             urlConnection = (HttpURLConnection) urlGetMovie.openConnection();
             InputStream in = urlConnection.getInputStream();
@@ -83,18 +76,6 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> imple
             }
         }
         return null;
-    }
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
-
-    @Override
-    protected void onPostExecute(ArrayList<Films> films) {
-        super.onPostExecute(films);
-        filmListener.onFilmsListAvailable(films);
-
     }
 
     public void getDetailsFilm(ArrayList<Films> resultList) {
@@ -165,8 +146,5 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> imple
             }
         }
     }
-
-    public interface FilmListener {
-        void onFilmsListAvailable(ArrayList<Films> filmList);
-    }
 }
+
