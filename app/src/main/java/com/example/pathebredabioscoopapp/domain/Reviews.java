@@ -1,6 +1,8 @@
 package com.example.pathebredabioscoopapp.domain;
 
-public class Reviews {
+import java.io.Serializable;
+
+public class Reviews implements Serializable {
     private final String TAG = getClass().getSimpleName();
     private int id;
     private double rating;

@@ -93,7 +93,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
                     Context context = v.getContext();
                     Class destinationActivity = PersonalListActivity.class;
                     Intent startChildActivityIntent = new Intent(context, destinationActivity);
-                    startChildActivityIntent.putExtra("EXTRA_NAME",  filmList);
+                    startChildActivityIntent.putExtra("LIST_NAME",  filmList);
                     context.startActivity(startChildActivityIntent);
                 }
             });

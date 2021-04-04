@@ -1,6 +1,8 @@
 package com.example.pathebredabioscoopapp.domain;
 
-public class Actors {
+import java.io.Serializable;
+
+public class Actors implements Serializable {
     private final String TAG = getClass().getSimpleName();
     private int id;
     private String name;
