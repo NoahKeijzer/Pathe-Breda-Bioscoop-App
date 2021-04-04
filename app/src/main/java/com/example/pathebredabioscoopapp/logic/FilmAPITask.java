@@ -43,10 +43,6 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> {
         return BASE_URL + "movie/" + id + "/credits?api_key=" + API_KEY + "&language=en-US";
     }
 
-//    public String stringRequestUserLists(){
-//        return BASE_URL + "account/"+ ACCOUNT_ID +  "lists?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID;
-//    }
-
     public String stringRequestGetGenreFilm(int id) {
         return BASE_URL + "movie/" + id + "?api_key=" + API_KEY + "&language=en-US";
     }
@@ -72,12 +68,10 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> {
                 Log.d(TAG, "response: " + response);
                 jsonConverter = new JSONConverter(response);
                 ArrayList<Films> resultList = jsonConverter.convertFilm();
-                getGenreFilm(resultList);
+                getDetailsFilm(resultList);
                 getActorsFilm(resultList);
                 return resultList;
             }
-
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -90,7 +84,7 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> {
         return null;
     }
 
-    public void getGenreFilm(ArrayList<Films> resultList) {
+    public void getDetailsFilm(ArrayList<Films> resultList) {
         for (Films x : resultList) {
             HttpURLConnection urlConnection = null;
             URL urlGetGenreFilm = null;
@@ -107,7 +101,11 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> {
                     Log.d(TAG, "response: " + response);
                     JSONConverter jsonConverter = new JSONConverter(response);
                     String genre = jsonConverter.convertGenreFilm();
+                    String trailer = jsonConverter.convertTrailer();
+                    int duration = jsonConverter.convertDuration();
                     x.setGenre(genre);
+                    x.setDuration(duration);
+                    x.setTrailer(trailer);
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -139,6 +137,9 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> {
                     JSONConverter jsonConverter = new JSONConverter(response);
                     ArrayList<Actors> actors = jsonConverter.convertActorsFilm();
                     x.setActors(actors);
+                    String director = jsonConverter.convertDirectorFilm();
+                    x.setDirector(director);
+
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
