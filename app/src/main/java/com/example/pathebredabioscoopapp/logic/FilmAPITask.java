@@ -10,6 +10,7 @@ import com.example.pathebredabioscoopapp.domain.Reviews;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -18,7 +19,7 @@ import java.util.Scanner;
 
 import retrofit2.Call;
 
-public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> {
+public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> implements Serializable {
     public static final String API_KEY = "90104c23f74fdca587142d076b5df361";
     public static final String BASE_URL = "https://api.themoviedb.org/3/";
     public static final String BASE_POSTER_PATH_URL = "https://image.tmdb.org/t/p/w500";
