@@ -3,6 +3,7 @@ package com.example.pathebredabioscoopapp.ui;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -100,6 +101,8 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_movie_detail,menu);
         return super.onCreateOptionsMenu(menu);
     }
 

@@ -1,8 +1,11 @@
 package com.example.pathebredabioscoopapp.ui;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -27,7 +30,7 @@ public class AllListsActivity extends AppCompatActivity implements FilmListAPITa
     private ArrayList<FilmList> filmList = new ArrayList<>();
     private RecyclerView personalListRecyclerView;
     private ListAdapter personalListAdapter;
-
+    private final String PREFS = "MyPrefs";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,11 +51,20 @@ public class AllListsActivity extends AppCompatActivity implements FilmListAPITa
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_add_list,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS,getApplicationContext().MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        switch(item.getItemId()){
+            case R.id.action_add:
+                Intent launchNewIntent = new Intent(this, NewListsActivity.class);
+                startActivityForResult(launchNewIntent, 0);
+        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -3,6 +3,7 @@ package com.example.pathebredabioscoopapp.ui;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -51,7 +52,9 @@ public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPIT
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_explore_list,menu);
+        return true;
     }
 
     @Override

@@ -12,6 +12,9 @@ public class SearchFilm {
     private ArrayList<Films> fullFilmList;
     private Filter filter = new Filter() {
 
+
+
+
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             return null;
