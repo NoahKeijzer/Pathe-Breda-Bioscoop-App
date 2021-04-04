@@ -1,9 +1,10 @@
 package com.example.pathebredabioscoopapp.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Films {
+public class Films implements Serializable {
     private final String TAG = getClass().getSimpleName();
     private int id;
     private int duration;

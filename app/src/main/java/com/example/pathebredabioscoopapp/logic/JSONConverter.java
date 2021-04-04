@@ -3,6 +3,7 @@ package com.example.pathebredabioscoopapp.logic;
 import android.util.Log;
 
 import com.example.pathebredabioscoopapp.domain.Actors;
+import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.domain.Films;
 import com.example.pathebredabioscoopapp.domain.Reviews;
 
@@ -10,11 +11,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class JSONConverter {
+public class JSONConverter implements Serializable {
     private final String TAG = getClass().getSimpleName();
     private String response = "";
     private final String ID_FILM = "id";
@@ -36,13 +38,16 @@ public class JSONConverter {
     private static final String REVIEW_DETAILS = "author_details";
     private static final String REVIEW_ID = "id";
     private static final String REVIEW_RATING = "rating";
+    private static final String JSON_FILMLIST_ID = "id";
+    private static final String JSON_FILMLIST_NAME = "name";
+    private static final String JSON_FILMLIST_LISTS = "";
+    private static final String delimterResults = "results";
+
     private String url_details = "https://api.themoviedb.org/3/movie/" + ID_FILM + "464052?api_key=90104c23f74fdca587142d076b5df361&language=en-US";
     private String url_review = "https://api.themoviedb.org/3/movie/" + ID_FILM + "/reviews?api_key=90104c23f74fdca587142d076b5df361&language=en-US&page=1";
     private String url_cast = "https://api.themoviedb.org/3/movie/" + ID_FILM + "399566/credits?api_key=90104c23f74fdca587142d076b5df361&language=en-US";
 
     ArrayList<Reviews> reviews;
-
-
     private int duration;
     private String director;
     private String trailer;
@@ -51,8 +56,23 @@ public class JSONConverter {
         this.response = response;
     }
 
-    public ArrayList<Films> convertMovieList() {
-        return null;
+    public ArrayList<FilmList> convertFilmList() {
+        ArrayList<FilmList> filmLists = new ArrayList<>();
+        try {
+            JSONObject responseObject = new JSONObject(response);
+            JSONArray responseResultSet = responseObject.getJSONArray(delimterResults);
+            for (int s = 0; s < responseResultSet.length(); s++) {
+                JSONObject resultSetObject = responseResultSet.getJSONObject(s);
+                int id = resultSetObject.getInt(JSON_FILMLIST_ID);
+                String name = resultSetObject.getString(JSON_FILMLIST_NAME);
+                ArrayList<Films> filmList = new ArrayList<>();
+                filmLists.add(new FilmList(id, name, filmList));
+            }
+        } catch (JSONException e) {
+            Log.d(TAG, "Geen JSON object");
+            e.printStackTrace();
+        }
+        return filmLists;
     }
 
     public ArrayList<Films> convertFilm() {

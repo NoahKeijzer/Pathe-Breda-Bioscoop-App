@@ -23,13 +23,13 @@ import java.util.ArrayList;
 
 /*import retrofit2.Call;*/
 
-public class ExploreMoviesActivity extends AppCompatActivity{
+public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPITask.FilmListener{
     private final String TAG = getClass().getSimpleName();
     private TextView mTitleText;
     private FilmAdapter filmAdapter;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<FilmList> filmList;
+    private ArrayList<Films> filmList= new ArrayList<>();
 
 
     @Override
@@ -71,8 +71,9 @@ public class ExploreMoviesActivity extends AppCompatActivity{
         super.onRestoreInstanceState(savedInstanceState);
     }
 
-    public void onFilmsAvailable(ArrayList<FilmList> movies) {
-        this.filmList.addAll(movies);
-        this.filmAdapter.notifyDataSetChanged();
+    @Override
+    public void onFilmsListAvailable(ArrayList<Films> filmList) {
+        this.filmList.addAll(filmList);
+        filmAdapter.notifyDataSetChanged();
     }
 }
