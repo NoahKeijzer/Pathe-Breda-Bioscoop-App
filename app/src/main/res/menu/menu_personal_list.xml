@@ -11,7 +11,7 @@
         android:id="@+id/action_filter"
         android:icon="@drawable/filter"
         android:title="Filter"
-        app:showAsAction="ifRoom">
+        app:showAsAction="always">
 
         <menu>
             <item
@@ -102,5 +102,10 @@
         android:icon="@drawable/sort_icon"
         android:title="@string/menu_sort"
         app:showAsAction="always"/>
+
+    <item android:id="@+id/search"
+        android:title="search"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="android.widget.SearchView" />
 
 </menu>
