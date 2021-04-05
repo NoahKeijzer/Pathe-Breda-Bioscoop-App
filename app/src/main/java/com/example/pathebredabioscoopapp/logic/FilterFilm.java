@@ -13,21 +13,25 @@ import java.util.Date;
 
 public class FilterFilm {
     private final String TAG = getClass().getSimpleName();
-    private ArrayList<Films> filteredFilmList;
-    private ArrayList<Films> fullFilmList;
+    private ArrayList<Films> filteredFilmList ;
+    private ArrayList<Films> fullFilmList ;
+    private FilmAdapter filmAdapter;
 
-    public FilterFilm(ArrayList<Films> fullFilmList){
+    public FilterFilm(ArrayList<Films> filteredFilmList, ArrayList<Films> fullFilmList, FilmAdapter filmAdapter){
+        this.filteredFilmList = filteredFilmList;
         this.fullFilmList = fullFilmList;
+        this.filmAdapter = filmAdapter;
     }
 
-    private Filter filter = new Filter() {
+    public Filter filter = new Filter() {
 
         @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
+        public FilterResults performFiltering(CharSequence constraint) {
             Log.d(TAG, "performFiltering is aangeroepen");
 
             FilterResults results = new FilterResults();
             String strConstraint = constraint.toString();
+
 
             if(isGenre(strConstraint)){
                 filterGenre(strConstraint);
@@ -49,6 +53,7 @@ public class FilterFilm {
         protected void publishResults(CharSequence constraint, FilterResults results) {
             fullFilmList.clear();
             fullFilmList.addAll((ArrayList) results.values);
+            filmAdapter.notifyDataSetChanged();
         }
     };
 
@@ -57,12 +62,12 @@ public class FilterFilm {
     }
 
     public boolean isGenre(String strConstraint) {
-        //Lijst met Genres moet hieronder nog worden gemaakt!
-        ArrayList<String> possibleGenres = new ArrayList<>();
-        possibleGenres.add("Hier moeten alle genres komen");
+        String[] possibleGenres = {"Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama",
+                "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "Thriller",
+                "TV Movie", "War", "Western"};
 
         for(String genre: possibleGenres){
-            if(genre.equals(strConstraint)){
+            if(strConstraint.contains(genre)){
                 return true;
             }
         }
