@@ -14,8 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pathebredabioscoopapp.R;
+import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.domain.Films;
+import com.example.pathebredabioscoopapp.ui.AllListsActivity;
 import com.example.pathebredabioscoopapp.ui.DetailActivity;
+import com.example.pathebredabioscoopapp.ui.ExploreMoviesActivity;
+import com.example.pathebredabioscoopapp.ui.PersonalListActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
@@ -24,9 +28,10 @@ import java.util.List;
 public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder> implements Serializable {
     private final String TAG = getClass().getSimpleName();
     private List<Films> filmList;
+    private AllListsActivity allListsActivity = new AllListsActivity();
     public static final String BASE_POSTER_PATH_URL = "https://image.tmdb.org/t/p/w500";
 
-    public FilmAdapter(List filmList){
+    public FilmAdapter(List filmList) {
         Log.d(TAG, "FilmAdapter constructor is aangeroepen.");
         this.filmList = filmList;
     }
@@ -57,6 +62,18 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
         holder.mGenreText.setText(String.valueOf(film.getGenre()));
         holder.mReleaseText.setText(String.valueOf(film.getReleaseDate()));
         holder.mLengthText.setText(String.valueOf(film.getDuration()));
+        holder.mAddButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Class destinationActivity = AllListsActivity.class;
+                Intent startChildActivityIntent = new Intent(context, destinationActivity);
+                startChildActivityIntent.putExtra("ADD_TO_LIST", film);
+                context.startActivity(startChildActivityIntent);
+            }
+        });
+
         String fullPath = BASE_POSTER_PATH_URL + film.getPoster();
         Picasso.get().load(fullPath).resize(250, 310).into(holder.mFilmImage);
     }
@@ -64,12 +81,12 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
     @Override
     public int getItemCount() {
 
-        if (null == filmList){
+        if (null == filmList) {
             Log.d(TAG, "getItemCount(): Er zijn 0 items.");
             return 0;
         }
 
-        Log.d(TAG,  "getItemCount(): Er zijn "+ filmList.size() + " items.");
+        Log.d(TAG, "getItemCount(): Er zijn " + filmList.size() + " items.");
         return filmList.size();
     }
 
@@ -83,38 +100,38 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
         private ImageView mDeleteButton;
         private ImageView mAddButton;
 
-       public FilmViewHolder(@NonNull View view) {
-           super(view);
+        public FilmViewHolder(@NonNull View view) {
+            super(view);
 
-           Log.d(TAG, "ViewHolder constructor is aangeroepen.");
+            Log.d(TAG, "ViewHolder constructor is aangeroepen.");
 
-           mFilmImage = (ImageView) itemView.findViewById(R.id.iv_poster_image);
-           mTitleText = (TextView) itemView.findViewById(R.id.tv_movie_title);
-           mRatingText = (TextView) itemView.findViewById(R.id.tv_movie_rating);
-           mGenreText = (TextView) itemView.findViewById(R.id.tv_movie_genre);
-           mReleaseText = (TextView) itemView.findViewById(R.id.tv_movie_release_year);
-           mLengthText = (TextView) itemView.findViewById(R.id.tv_movie_length);
-           mDeleteButton = (ImageView) itemView.findViewById(R.id.iv_delete_icon);
-           mAddButton = (ImageView) itemView.findViewById(R.id.iv_add_icon);
+            mFilmImage = (ImageView) itemView.findViewById(R.id.iv_poster_image);
+            mTitleText = (TextView) itemView.findViewById(R.id.tv_movie_title);
+            mRatingText = (TextView) itemView.findViewById(R.id.tv_movie_rating);
+            mGenreText = (TextView) itemView.findViewById(R.id.tv_movie_genre);
+            mReleaseText = (TextView) itemView.findViewById(R.id.tv_movie_release_year);
+            mLengthText = (TextView) itemView.findViewById(R.id.tv_movie_length);
+            mDeleteButton = (ImageView) itemView.findViewById(R.id.iv_delete_icon);
+            mAddButton = (ImageView) itemView.findViewById(R.id.iv_add_icon);
 
-           itemView.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   Log.d(TAG, "onClick() van een view is aangeroepen.");
-                   int position = 1;
-                   for (Films movie : filmList) {
-                       if (mTitleText.getText().toString().equals(movie.getTitle())) {
-                           position = filmList.indexOf(movie);
-                       }
-                   }
-                   Films film = filmList.get(position);
-                   Context context = v.getContext();
-                   Class destinationActivity = DetailActivity.class;
-                   Intent startActivity = new Intent(context, destinationActivity);
-                   startActivity.putExtra("FILM_NAME", film);
-                   context.startActivity(startActivity);
-               }
-           });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "onClick() van een view is aangeroepen.");
+                    int position = 1;
+                    for (Films movie : filmList) {
+                        if (mTitleText.getText().toString().equals(movie.getTitle())) {
+                            position = filmList.indexOf(movie);
+                        }
+                    }
+                    Films film = filmList.get(position);
+                    Context context = v.getContext();
+                    Class destinationActivity = DetailActivity.class;
+                    Intent startActivity = new Intent(context, destinationActivity);
+                    startActivity.putExtra("FILM_NAME", film);
+                    context.startActivity(startActivity);
+                }
+            });
 
            /*mDeleteButton.setOnClickListener(new View.OnClickListener() {
                @Override
@@ -154,6 +171,6 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
 
                }
            });*/
-       }
-   }
+        }
+    }
 }

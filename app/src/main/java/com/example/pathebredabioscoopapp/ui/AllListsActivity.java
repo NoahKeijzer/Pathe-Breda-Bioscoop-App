@@ -1,5 +1,6 @@
 package com.example.pathebredabioscoopapp.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,16 +29,17 @@ public class AllListsActivity extends AppCompatActivity implements FilmListAPITa
     private final String TAG = getClass().getSimpleName();
     private RecyclerView.LayoutManager layoutManager;
     private TextView mTitleText;
+    private ImageView mAddButton;
     private ArrayList<FilmList> filmList = new ArrayList<>();
     private RecyclerView personalListRecyclerView;
     private ListAdapter personalListAdapter;
+    private FilmAdapter filmAdapter;
     private final String PREFS = "MyPrefs";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_lists);
-
         mTitleText = findViewById(R.id.tv_personal_lists_title);
         mTitleText.setText("Personal lists");
         layoutManager = new LinearLayoutManager(this);
@@ -46,8 +49,12 @@ public class AllListsActivity extends AppCompatActivity implements FilmListAPITa
         personalListRecyclerView.setAdapter(personalListAdapter);
 
         new FilmListAPITask(this).execute();
-
+        Films film = (Films) getIntent().getSerializableExtra("ADD_TO_LIST");
+        if (film != null) {
+            personalListAdapter.setFilm(film);
+        }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

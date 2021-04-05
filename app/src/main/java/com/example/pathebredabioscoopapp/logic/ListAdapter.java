@@ -1,4 +1,4 @@
-package com.example.pathebredabioscoopapp.logic;
+    package com.example.pathebredabioscoopapp.logic;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,14 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pathebredabioscoopapp.R;
 import com.example.pathebredabioscoopapp.domain.FilmList;
+import com.example.pathebredabioscoopapp.domain.Films;
 import com.example.pathebredabioscoopapp.ui.DetailActivity;
 import com.example.pathebredabioscoopapp.ui.PersonalListActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
     private final String TAG = getClass().getSimpleName();
     private List<FilmList> list;
+    private Films film;
 
     public ListAdapter(List list){
         Log.d(TAG, "ListAdapter constructor is aangeroepen.");
@@ -64,6 +67,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         return list.size();
     }
 
+    public void setFilm(Films film) {
+        this.film = film;
+    }
+
     public class ListViewHolder extends RecyclerView.ViewHolder {
         private TextView mListName;
         private ImageView mDeleteButton;
@@ -94,6 +101,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
                     Class destinationActivity = PersonalListActivity.class;
                     Intent startChildActivityIntent = new Intent(context, destinationActivity);
                     startChildActivityIntent.putExtra("LIST_NAME",  filmList);
+                    startChildActivityIntent.putExtra("ADD_TO_LIST",  film);
                     context.startActivity(startChildActivityIntent);
                 }
             });
