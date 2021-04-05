@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,10 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pathebredabioscoopapp.R;
 import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.domain.Films;
-import com.example.pathebredabioscoopapp.logic.FilmAPI;
 import com.example.pathebredabioscoopapp.logic.FilmAPITask;
 import com.example.pathebredabioscoopapp.logic.FilmAdapter;
 import com.example.pathebredabioscoopapp.logic.FilterFilm;
+import com.example.pathebredabioscoopapp.logic.SearchFilm;
 import com.example.pathebredabioscoopapp.logic.SortFilm;
 
 import java.lang.reflect.Array;
@@ -37,6 +39,7 @@ public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPIT
     private ArrayList<Films> fullFilmList = new ArrayList<>();
     private SortFilm sortFilm;
     private FilterFilm filterFilm;
+    private  SearchFilm searchFilm;
 
 
     @Override
@@ -59,6 +62,7 @@ public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPIT
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_explore_list,menu);
+        searchFilm = new SearchFilm(fullFilmList, filmAdapter);
         return true;
     }
 
@@ -123,6 +127,22 @@ public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPIT
             case R.id.filter_on_genre_western:
                 this.filterFilm.getFilter().filter("Western");
                 return true;
+            case R.id.search:
+                SearchView searchView = (SearchView) item.getActionView();
+                searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        searchFilm.getFilter().filter(newText);
+                        return false;
+                    }
+                });
         }
         return true;
     }
