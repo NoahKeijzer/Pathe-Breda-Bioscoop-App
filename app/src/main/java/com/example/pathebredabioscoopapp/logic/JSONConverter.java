@@ -161,7 +161,7 @@ public class JSONConverter implements Serializable {
                 String picturePath = actorsJSON.getString(ACTOR_PICTURE);
                 String character = actorsJSON.getString(ACTOR_CHARACTER);
                 int id = actorsJSON.getInt(ACTOR_ID);
-                actors.add(new Actors(id, name, picturePath, character));
+                actors.add(new Actors(id, name, character, picturePath));
             }
 
         } catch (JSONException e) {

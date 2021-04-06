@@ -1,12 +1,15 @@
 package com.example.pathebredabioscoopapp.ui;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -73,25 +76,35 @@ public class DetailActivity extends AppCompatActivity {
         mActorThreeText = findViewById(R.id.tv_movie_detail_actor_three);
 
 
+        mActorOneImage = findViewById(R.id.iv_movie_detail_actor_one);
+        mActorTwoImage = findViewById(R.id.iv_movie_detail_actor_two);
+        mActorThreeImage = findViewById(R.id.iv_movie_detail_actor_three);
+
         ArrayList<Actors> actor = film.getActors();
         for(int i = 0; i < actor.size(); i++){
             if(i == 0){
                 mActorOneText.setText(actor.get(i).getName());
+                Picasso.get().load(BASE_POSTER_PATH_URL + actor.get(i).getPicture()).resize(250, 310).into(mActorOneImage);
             }else if(i == 1){
                 mActorTwoText.setText(actor.get(i).getName());
+                Picasso.get().load(BASE_POSTER_PATH_URL + actor.get(i).getPicture()).resize(250, 310).into(mActorTwoImage);
             }else if(i == 2){
                 mActorThreeText.setText(actor.get(i).getName());
+                Picasso.get().load(BASE_POSTER_PATH_URL + actor.get(i).getPicture()).resize(250, 310).into(mActorThreeImage);
             }else{
                 break;
             }
         }
 
-        mActorOneImage = findViewById(R.id.iv_movie_detail_actor_one);
-        mActorTwoImage = findViewById(R.id.iv_movie_detail_actor_two);
-        mActorThreeImage = findViewById(R.id.iv_movie_detail_actor_three);
-
 
         mTrailerButton = findViewById(R.id.btn_view_trailer);
+        mTrailerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                watchYoutubeVideo(v.getContext(), film.getTrailer());
+            }
+        });
+
         mWriteReviewButton = findViewById(R.id.btn_view_reviews);
 
         mPosterImageView = findViewById(R.id.iv_movie_detail_poster_image);
@@ -145,5 +158,14 @@ public class DetailActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
     }
 
-
+    public static void watchYoutubeVideo(Context context, String id) {
+        Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + id));
+        Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse("http://www.youtube.com/watch?v=" + id));
+        try {
+            context.startActivity(appIntent);
+        } catch (ActivityNotFoundException ex) {
+            context.startActivity(webIntent);
+        }
+    }
 }
