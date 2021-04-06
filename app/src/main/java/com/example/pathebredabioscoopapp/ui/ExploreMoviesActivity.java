@@ -49,7 +49,8 @@ public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPIT
         mTitleText.setText("Populair movies");
         recyclerView = findViewById(R.id.rv_general_recyclerview);
         recyclerView.setLayoutManager(layoutManager);
-        filmAdapter = new FilmAdapter(fullFilmList);
+        int layoutIdForListItem = R.layout.explore_list_item;
+        filmAdapter = new FilmAdapter(fullFilmList, layoutIdForListItem);
         recyclerView.setAdapter(filmAdapter);
 
         new FilmAPITask(this).execute();

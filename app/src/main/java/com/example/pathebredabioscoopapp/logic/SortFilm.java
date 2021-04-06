@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.Date;
 
 public class SortFilm {
+
     private final String TAG = getClass().getSimpleName();
     private ArrayList<Films> filmList;
     private ArrayList<Films> fullFilmList = new ArrayList<>();

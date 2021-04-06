@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
+
 import com.example.pathebredabioscoopapp.R;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,59 +25,63 @@ import com.example.pathebredabioscoopapp.logic.AddToListTask;
 import com.example.pathebredabioscoopapp.logic.FilmAPITask;
 import com.example.pathebredabioscoopapp.logic.FilmAdapter;
 import com.example.pathebredabioscoopapp.logic.FilterFilm;
+import com.example.pathebredabioscoopapp.logic.RemoveFilmFromListTask;
 import com.example.pathebredabioscoopapp.logic.SearchFilm;
 import com.example.pathebredabioscoopapp.logic.SortFilm;
 
 import java.util.ArrayList;
 
 public class PersonalListActivity extends AppCompatActivity implements FilmAPITask.FilmListener {
-    private AllListsActivity allListsActivity;
     private TextView mTitleText;
     private FilmAdapter filmAdapter;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Films> filteredFilmList = new ArrayList<>();
     private ArrayList<Films> fullFilmList = new ArrayList<>();
-    private String nameList;
     private SortFilm sortFilm;
     private FilterFilm filterFilm;
     private SearchFilm searchFilm;
+    private ImageView mDeleteButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-            setContentView(R.layout.activity_recycler_view);
-            mTitleText = findViewById(R.id.tv_general_recyclerview_title);
-            layoutManager = new LinearLayoutManager(this);
+        setContentView(R.layout.activity_recycler_view);
+        mTitleText = findViewById(R.id.tv_general_recyclerview_title);
+        layoutManager = new LinearLayoutManager(this);
 
-            recyclerView = findViewById(R.id.rv_general_recyclerview);
-            recyclerView.setLayoutManager(layoutManager);
-            filmAdapter = new FilmAdapter(fullFilmList);
-            recyclerView.setAdapter(filmAdapter);
+        recyclerView = findViewById(R.id.rv_general_recyclerview);
+        recyclerView.setLayoutManager(layoutManager);
+        int layoutIdForListItem = R.layout.personal_explore_list_item;
+        filmAdapter = new FilmAdapter(fullFilmList, layoutIdForListItem);
+        recyclerView.setAdapter(filmAdapter);
+        FilmList filmlist = (FilmList) getIntent().getSerializableExtra("LIST_NAME");
+        Films film = (Films) getIntent().getSerializableExtra("ADD_TO_LIST");
+        mTitleText.setText(filmlist.getName());
 
-            FilmList filmlist = (FilmList) getIntent().getSerializableExtra("LIST_NAME");
-            Films film = (Films) getIntent().getSerializableExtra("ADD_TO_LIST");
-            mTitleText.setText(filmlist.getName());
-            new FilmAPITask(this, filmlist.getId()).execute();
+        new FilmAPITask(this, filmlist.getId()).execute();
 
-            if(film != null && filmlist != null){
-                new AddToListTask(film, filmlist, filmAdapter).execute();
-            }
+        if (film != null && filmlist != null) {
+            new AddToListTask(film, filmlist, filmAdapter).execute();
         }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_personal_list,menu);
-        searchFilm = new SearchFilm(fullFilmList, filmAdapter);
+        inflater.inflate(R.menu.menu_explore_list, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         this.filterFilm = new FilterFilm(filteredFilmList, fullFilmList, filmAdapter);
-        switch(item.getItemId()) {
+        this.sortFilm = new SortFilm(fullFilmList, filmAdapter);
+        this.searchFilm = new SearchFilm(fullFilmList, filmAdapter);
+        switch (item.getItemId()) {
+            case R.id.action_sort:
+                return true;
             case R.id.filter_on_genre_action:
                 this.filterFilm.getFilter().filter("Action");
                 return true;
@@ -130,6 +138,24 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
                 return true;
             case R.id.filter_on_genre_western:
                 this.filterFilm.getFilter().filter("Western");
+                return true;
+            case R.id.sort_a_to_z:
+                this.sortFilm.getFilter().filter("sortZtoA");
+                return true;
+            case R.id.sort_z_to_a:
+                this.sortFilm.getFilter().filter("sortZtoA");
+                return true;
+            case R.id.sort_high_to_low:
+                this.sortFilm.getFilter().filter("sortRatingHigh");
+                return true;
+            case R.id.sort_low_to_high:
+                this.sortFilm.getFilter().filter("sortRatingLow");
+                return true;
+            case R.id.sort_new_to_old:
+                this.sortFilm.getFilter().filter("sortNewToOld");
+                return true;
+            case R.id.sort_old_to_new:
+                this.sortFilm.getFilter().filter("sortOldToNew");
                 return true;
             case R.id.search:
                 SearchView searchView = (SearchView) item.getActionView();
