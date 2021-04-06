@@ -67,6 +67,13 @@ public class ReviewsAPITask extends AsyncTask<String, Void, ArrayList<Reviews>> 
         return null;
     }
 
+    @Override
+    protected void onPostExecute(ArrayList<Reviews> reviews) {
+        super.onPostExecute(reviews);
+        listener.onReviewAvailable(reviews);
+
+    }
+
     public interface ReviewsListener {
         void onReviewAvailable(ArrayList<Reviews> reviewsList);
     }

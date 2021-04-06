@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewActivity extends AppCompatActivity implements ReviewsAPITask.ReviewsListener, Serializable {
-    private ArrayList<Reviews> reviews;
+    private ArrayList<Reviews> reviews = new ArrayList<>();
     private TextView mUsername;
     private TextView mContent;
     private ReviewAdapter reviewAdapter;

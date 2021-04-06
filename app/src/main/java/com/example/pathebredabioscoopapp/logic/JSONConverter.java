@@ -184,7 +184,7 @@ public class JSONConverter implements Serializable {
                 String authorUsername = jsonAuthorDetails.getString(REVIEW_USERNAME);
                 double rating = jsonAuthorDetails.getDouble(REVIEW_RATING);
                 String content = reviewJSONObject.getString(REVIEW_CONTENT);
-                int id = reviewJSONObject.getInt(REVIEW_ID);
+                String id = reviewJSONObject.getString(REVIEW_ID);
                 reviews.add(new Reviews(id, rating, name, authorUsername, content));
             }
         } catch (JSONException e) {
