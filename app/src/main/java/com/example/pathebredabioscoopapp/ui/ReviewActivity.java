@@ -24,6 +24,7 @@ import java.util.List;
 
 public class ReviewActivity extends AppCompatActivity implements ReviewsAPITask.ReviewsListener, Serializable {
     private ArrayList<Reviews> reviews = new ArrayList<>();
+    private Films film;
     private TextView mUsername;
     private TextView mContent;
     private ReviewAdapter reviewAdapter;
@@ -39,12 +40,12 @@ public class ReviewActivity extends AppCompatActivity implements ReviewsAPITask.
         recyclerView = findViewById(R.id.rv_general_recyclerview);
         recyclerView.setLayoutManager(layoutManager);
 
-        reviews = (ArrayList<Reviews>) getIntent().getSerializableExtra("REVIEW_NAME");
+        film = (Films) getIntent().getSerializableExtra("REVIEW_NAME");
 
         reviewAdapter = new ReviewAdapter(reviews);
         recyclerView.setAdapter(reviewAdapter);
 
-        new ReviewsAPITask(this).execute();
+        new ReviewsAPITask(this, film).execute();
     }
 
     @Override

@@ -31,7 +31,6 @@ import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity implements Serializable{
     private Films film;
-    private ArrayList<Reviews> reviews;
     private TextView mTitleText;
     private TextView mGenreTextView;
     private TextView mReleaseDateText;
@@ -59,16 +58,11 @@ public class DetailActivity extends AppCompatActivity implements Serializable{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
         film = (Films) getIntent().getSerializableExtra("FILM_NAME");
-        reviews = film.getReviews();
         fillViews();
 
         //layout = new LinearLayoutManager(this);
         //mRecyclerView = findViewById(R.id.rv_reviews);
         //mRecyclerView.setLayoutManager(layout);
-
-
-
-
 
     }
 
@@ -113,12 +107,13 @@ public class DetailActivity extends AppCompatActivity implements Serializable{
         mGiveRatingButton = findViewById(R.id.btn_write_review);
 
         mViewReviewButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
                 Class destination = ReviewActivity.class;
                 Intent startChildIntent = new Intent(context, destination);
-                startChildIntent.putExtra("REVIEW_NAME", reviews);
+                startChildIntent.putExtra("REVIEW_NAME", film);
                 context.startActivity(startChildIntent);
             }
         });
