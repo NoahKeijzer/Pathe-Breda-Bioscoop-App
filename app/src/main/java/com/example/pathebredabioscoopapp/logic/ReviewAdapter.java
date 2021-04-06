@@ -84,25 +84,6 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
             mUsername = (TextView) itemView.findViewById(R.id.tv_username);
             mContent = (TextView) itemView.findViewById(R.id.tv_review_description);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d(TAG, "onClick() van een view is aangeroepen.");
-                    int position = 1;
-                    for (Reviews review : reviewList) {
-                        if (mUsername.getText().toString().equals(review.getUsername())) {
-                            position = reviewList.indexOf(review);
-                        }
-                    }
-
-                    Reviews review = reviewList.get(position);
-                    Context context = v.getContext();
-                    Class destinationActivity = ReviewActivity.class;
-                    Intent startChildActivityIntent = new Intent(context, destinationActivity);
-                    startChildActivityIntent.putExtra("REVIEW_NAME",  review);
-                    context.startActivity(startChildActivityIntent);
-                }
-            });
         }
     }
 }

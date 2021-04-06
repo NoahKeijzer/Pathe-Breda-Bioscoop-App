@@ -23,13 +23,15 @@ import com.example.pathebredabioscoopapp.R;
 import com.example.pathebredabioscoopapp.domain.Actors;
 import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.domain.Films;
+import com.example.pathebredabioscoopapp.domain.Reviews;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements Serializable{
     private Films film;
+    private ArrayList<Reviews> reviews;
     private TextView mTitleText;
     private TextView mGenreTextView;
     private TextView mReleaseDateText;
@@ -57,6 +59,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
         film = (Films) getIntent().getSerializableExtra("FILM_NAME");
+        reviews = film.getReviews();
         fillViews();
 
         //layout = new LinearLayoutManager(this);
@@ -108,11 +111,23 @@ public class DetailActivity extends AppCompatActivity {
         mTrailerButton = findViewById(R.id.btn_view_trailer);
         mViewReviewButton = findViewById(R.id.btn_view_reviews);
         mGiveRatingButton = findViewById(R.id.btn_write_review);
+
+        mViewReviewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Class destination = ReviewActivity.class;
+                Intent startChildIntent = new Intent(context, destination);
+                startChildIntent.putExtra("REVIEW_NAME", reviews);
+                context.startActivity(startChildIntent);
+            }
+        });
+
         mGiveRatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
-                Class destination = NewReviewActivity.class;
+                Class destination = ReviewActivity.class;
                 Intent startChildIntent = new Intent(context, destination);
                 startChildIntent.putExtra(FILM_INTENT, film);
                 context.startActivity(startChildIntent);
