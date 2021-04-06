@@ -56,8 +56,8 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
         Reviews review = reviewList.get(position);
 
-        holder.mUsername.setText(String.valueOf(review.getUsername()));
-        holder.mContent.setText(String.valueOf(review.getContent()));
+        holder.mUsername.setText("Username: " + String.valueOf(review.getUsername()));
+        holder.mContent.setText("Review: \n\n" + String.valueOf(review.getContent()));
     }
 
     @Override
