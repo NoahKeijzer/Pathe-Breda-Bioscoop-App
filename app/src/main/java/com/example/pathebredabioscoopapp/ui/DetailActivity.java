@@ -1,5 +1,7 @@
 package com.example.pathebredabioscoopapp.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
@@ -40,7 +42,7 @@ public class DetailActivity extends AppCompatActivity {
     private Button mTrailerButton;
     private Button mWriteReviewButton;
     private Button mGiveRatingButton;
-
+    private Films film;
     private static final String BASE_POSTER_PATH_URL = "https://image.tmdb.org/t/p/w500";
 
     @Override
@@ -48,6 +50,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
         Films film = (Films) getIntent().getSerializableExtra("FILM_NAME");
+        this.film = film;
         fillViews(film);
     }
 
@@ -108,6 +111,22 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_add:
+                Context context = this;
+                Class destinationActivity = AllListsActivity.class;
+                Intent startChildActivityIntent = new Intent(context, destinationActivity);
+                startChildActivityIntent.putExtra("ADD_TO_LIST", film);
+                context.startActivity(startChildActivityIntent);
+                return true;
+            case R.id.action_share:
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "See this awesome movie: \n" + film.getTrailer());
+                sendIntent.setType("text/plain");
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+        }
         return super.onOptionsItemSelected(item);
     }
 

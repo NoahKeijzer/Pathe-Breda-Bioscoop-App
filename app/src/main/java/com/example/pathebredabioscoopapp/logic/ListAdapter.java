@@ -25,6 +25,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     private final String TAG = getClass().getSimpleName();
     private List<FilmList> list;
     private Films film;
+    private ListAdapter listAdapter = this;
 
     public ListAdapter(List list){
         Log.d(TAG, "ListAdapter constructor is aangeroepen.");
@@ -83,7 +84,42 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
 
             mListName = (TextView) itemView.findViewById(R.id.tv_list_name);
             mDeleteButton = (ImageView) itemView.findViewById(R.id.iv_delete_icon);
+            mDeleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "onClick() van een view is aangeroepen.");
+                    int position = 1;
+                    for (FilmList personalList : list) {
+                        if (mListName.getText().toString().equals(personalList.getName())) {
+                            position = list.indexOf(personalList);
+                        }
+                    }
+                    FilmList filmList = list.get(position);
+                    new DeleteListTask(filmList, listAdapter).execute();
+                }
+            });
+
             mShareButton = (ImageView) itemView.findViewById(R.id.iv_share_icon);
+            mShareButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "onClick() van een view is aangeroepen.");
+                    int position = 1;
+                    for (FilmList personalList : list) {
+                        if (mListName.getText().toString().equals(personalList.getName())) {
+                            position = list.indexOf(personalList);
+                        }
+                    }
+                    Context context = v.getContext();
+                    FilmList filmList = list.get(position);
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, "See this awesome list: \n https://www.themoviedb.org/list/"+ filmList.getId() + "?language=nl");
+                    sendIntent.setType("text/plain");
+                    Intent shareIntent = Intent.createChooser(sendIntent, null);
+                    context.startActivity(shareIntent);
+                }
+            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
