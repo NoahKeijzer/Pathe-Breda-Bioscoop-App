@@ -25,6 +25,7 @@ import com.example.pathebredabioscoopapp.domain.Actors;
 import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.domain.Films;
 import com.example.pathebredabioscoopapp.domain.Reviews;
+import com.example.pathebredabioscoopapp.logic.NewRatingReviewTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
@@ -103,7 +104,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         mTrailerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://" + film.getTrailer()));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(film.getTrailer()));
                 startActivity(intent);
             }
         });
@@ -111,7 +112,6 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         mGiveRatingButton = findViewById(R.id.btn_write_review);
 
         mViewReviewButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
@@ -125,11 +125,11 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         mGiveRatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = v.getContext();
-                Class destination = ReviewActivity.class;
-                Intent startChildIntent = new Intent(context, destination);
-                startChildIntent.putExtra(FILM_INTENT, film);
-                context.startActivity(startChildIntent);
+                Context contextTwo = v.getContext();
+                Class destinationTwo = NewReviewActivity.class;
+                Intent aChildIntent = new Intent(contextTwo, destinationTwo);
+                aChildIntent.putExtra(FILM_INTENT, film);
+                contextTwo.startActivity(aChildIntent);
             }
         });
 
