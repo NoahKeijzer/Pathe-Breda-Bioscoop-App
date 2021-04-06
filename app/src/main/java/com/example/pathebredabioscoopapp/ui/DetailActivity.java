@@ -3,6 +3,7 @@ package com.example.pathebredabioscoopapp.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.Menu;
@@ -29,7 +30,7 @@ import com.squareup.picasso.Picasso;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DetailActivity extends AppCompatActivity implements Serializable{
+public class DetailActivity extends AppCompatActivity implements Serializable {
     private Films film;
     private TextView mTitleText;
     private TextView mGenreTextView;
@@ -66,7 +67,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable{
 
     }
 
-    public void fillViews(){
+    public void fillViews() {
         mTitleText = findViewById(R.id.tv_movie_title);
         mTitleText.setText(film.getTitle());
         mGenreTextView = findViewById(R.id.tv_movie_detail_genre);
@@ -83,26 +84,34 @@ public class DetailActivity extends AppCompatActivity implements Serializable{
         mActorTwoText = findViewById(R.id.tv_movie_detail_actor_two);
         mActorThreeText = findViewById(R.id.tv_movie_detail_actor_three);
 
-
-        ArrayList<Actors> actor = film.getActors();
-        for(int i = 0; i < actor.size(); i++){
-            if(i == 0){
-                mActorOneText.setText(actor.get(i).getName());
-            }else if(i == 1){
-                mActorTwoText.setText(actor.get(i).getName());
-            }else if(i == 2){
-                mActorThreeText.setText(actor.get(i).getName());
-            }else{
-                break;
-            }
-        }
-
         mActorOneImage = findViewById(R.id.iv_movie_detail_actor_one);
         mActorTwoImage = findViewById(R.id.iv_movie_detail_actor_two);
         mActorThreeImage = findViewById(R.id.iv_movie_detail_actor_three);
 
-
+        ArrayList<Actors> actor = film.getActors();
+        for (int i = 0; i < actor.size(); i++) {
+            if (i == 0) {
+                mActorOneText.setText(actor.get(i).getName());
+                Picasso.get().load(BASE_POSTER_PATH_URL + actor.get(i).getPicture()).resize(250, 310).into(mActorOneImage);
+            } else if (i == 1) {
+                mActorTwoText.setText(actor.get(i).getName());
+                Picasso.get().load(BASE_POSTER_PATH_URL + actor.get(i).getPicture()).resize(250, 310).into(mActorTwoImage);
+            } else if (i == 2) {
+                mActorThreeText.setText(actor.get(i).getName());
+                Picasso.get().load(BASE_POSTER_PATH_URL + actor.get(i).getPicture()).resize(250, 310).into(mActorThreeImage);
+            } else {
+                break;
+            }
+        }
+        
         mTrailerButton = findViewById(R.id.btn_view_trailer);
+        mTrailerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://" + film.getTrailer()));
+                startActivity(intent);
+            }
+        });
         mViewReviewButton = findViewById(R.id.btn_view_reviews);
         mGiveRatingButton = findViewById(R.id.btn_write_review);
 
@@ -136,19 +145,32 @@ public class DetailActivity extends AppCompatActivity implements Serializable{
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_movie_detail,menu);
+        inflater.inflate(R.menu.menu_movie_detail, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Context context = this;
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                Class destinationActivity = AllListsActivity.class;
+                Intent startActivity = new Intent(context, destinationActivity);
+                startActivity.putExtra("ADD_TO_LIST", film);
+                context.startActivity(startActivity);
+            case R.id.action_share:
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "See this awesome movie: \n https://www.themoviedb.org/list/" + film.getId() + "?language=nl");
+                sendIntent.setType("text/plain");
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                context.startActivity(shareIntent);
+        }
         return super.onOptionsItemSelected(item);
     }
-
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);

@@ -26,6 +26,7 @@ import java.util.List;
 public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder> implements Serializable {
     private final String TAG = getClass().getSimpleName();
     private List<Films> filmList;
+    private ArrayList<Films> fullFilmList;
     public static final String BASE_POSTER_PATH_URL = "https://image.tmdb.org/t/p/w500";
     private int layoutIdForListItem;
     private FilmList filmListObject;
@@ -38,7 +39,8 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
     }
 
     public FilmAdapter(ArrayList<Films> fullFilmList, int layoutIdForListItem) {
-        this.filmList = filmList;
+        Log.d(TAG, "FilmAdapter constructor is aangeroepen.");
+        this.filmList = fullFilmList;
         this.layoutIdForListItem = layoutIdForListItem;
     }
 
@@ -109,21 +111,23 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
             mGenreText = (TextView) itemView.findViewById(R.id.tv_movie_genre);
             mReleaseText = (TextView) itemView.findViewById(R.id.tv_movie_release_year);
             mLengthText = (TextView) itemView.findViewById(R.id.tv_movie_length);
-            mDeleteButton = (ImageView) itemView.findViewById(R.id.iv_delete_icon);
-            mDeleteButton.setOnClickListener(new View.OnClickListener() {
+            if(layoutIdForListItem == R.layout.personal_explore_list_item) {
+                mDeleteButton = (ImageView) itemView.findViewById(R.id.iv_delete_icon);
+                mDeleteButton.setOnClickListener(new View.OnClickListener() {
 
-                @Override
-                public void onClick(View v) {
-                    int position = 1;
-                    for (Films movie : filmList) {
-                        if (mTitleText.getText().toString().equals(movie.getTitle())) {
-                            position = filmList.indexOf(movie);
+                    @Override
+                    public void onClick(View v) {
+                        int position = 1;
+                        for (Films movie : filmList) {
+                            if (mTitleText.getText().toString().equals(movie.getTitle())) {
+                                position = filmList.indexOf(movie);
+                            }
                         }
+                        Films film = filmList.get(position);
+                        new RemoveFilmFromListTask(film, filmListObject).execute();
                     }
-                    Films film = filmList.get(position);
-                    new RemoveFilmFromListTask(film, filmListObject).execute();
-                }
-            });
+                });
+            }
 
             mAddButton = (ImageView) itemView.findViewById(R.id.iv_add_icon);
             itemView.setOnClickListener(new View.OnClickListener() {

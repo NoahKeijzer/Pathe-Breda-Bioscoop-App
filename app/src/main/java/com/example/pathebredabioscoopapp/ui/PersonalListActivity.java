@@ -41,7 +41,6 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
     private SortFilm sortFilm;
     private FilterFilm filterFilm;
     private SearchFilm searchFilm;
-    private ImageView mDeleteButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
