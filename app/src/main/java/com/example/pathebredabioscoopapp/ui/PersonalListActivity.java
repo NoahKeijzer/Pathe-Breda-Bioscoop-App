@@ -54,10 +54,10 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
         recyclerView = findViewById(R.id.rv_general_recyclerview);
         recyclerView.setLayoutManager(layoutManager);
         int layoutIdForListItem = R.layout.personal_explore_list_item;
-        filmAdapter = new FilmAdapter(fullFilmList, layoutIdForListItem);
-        recyclerView.setAdapter(filmAdapter);
         FilmList filmlist = (FilmList) getIntent().getSerializableExtra("LIST_NAME");
         Films film = (Films) getIntent().getSerializableExtra("ADD_TO_LIST");
+        filmAdapter = new FilmAdapter(fullFilmList, layoutIdForListItem, filmlist);
+        recyclerView.setAdapter(filmAdapter);
         mTitleText.setText(filmlist.getName());
 
         new FilmAPITask(this, filmlist.getId()).execute();

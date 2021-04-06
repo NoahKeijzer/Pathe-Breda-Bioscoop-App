@@ -52,7 +52,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         Log.d(TAG, "onBind is aangeroepen");
 
         FilmList filmList = list.get(position);
-
+        int id = filmList.getId();
         holder.mListName.setText(filmList.getName());
     }
 
