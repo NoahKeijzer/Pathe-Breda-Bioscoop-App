@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pathebredabioscoopapp.R;
-import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.domain.Films;
 import com.example.pathebredabioscoopapp.logic.FilmAPITask;
 import com.example.pathebredabioscoopapp.logic.FilmAdapter;
@@ -24,7 +23,6 @@ import com.example.pathebredabioscoopapp.logic.FilterFilm;
 import com.example.pathebredabioscoopapp.logic.SearchFilm;
 import com.example.pathebredabioscoopapp.logic.SortFilm;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /*import retrofit2.Call;*/
