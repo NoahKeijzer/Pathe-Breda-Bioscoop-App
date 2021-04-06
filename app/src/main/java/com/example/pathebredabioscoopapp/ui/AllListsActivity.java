@@ -33,8 +33,6 @@ public class AllListsActivity extends AppCompatActivity implements FilmListAPITa
     private ArrayList<FilmList> filmList = new ArrayList<>();
     private RecyclerView personalListRecyclerView;
     private ListAdapter personalListAdapter;
-    private FilmAdapter filmAdapter;
-    private ImageView mShareButton;
     private final String PREFS = "MyPrefs";
 
     @Override
@@ -48,7 +46,6 @@ public class AllListsActivity extends AppCompatActivity implements FilmListAPITa
         personalListRecyclerView.setLayoutManager(layoutManager);
         personalListAdapter = new ListAdapter(filmList);
         personalListRecyclerView.setAdapter(personalListAdapter);
-        mShareButton = (ImageView) findViewById(R.id.iv_share_icon);
 
         new FilmListAPITask(this).execute();
         Films film = (Films) getIntent().getSerializableExtra("ADD_TO_LIST");

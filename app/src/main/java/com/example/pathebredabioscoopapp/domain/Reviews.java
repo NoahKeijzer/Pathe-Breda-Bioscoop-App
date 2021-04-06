@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class Reviews implements Serializable {
     private final String TAG = getClass().getSimpleName();
-    private int id;
+    private String id;
     private double rating;
     private String name;
     private String username;
     private String content;
 
-    public Reviews(int id, double rating, String name, String username, String content) {
+    public Reviews(String id, double rating, String name, String username, String content) {
         this.id = id;
         this.rating = rating;
         this.name = name;
@@ -18,11 +18,11 @@ public class Reviews implements Serializable {
         this.content = content;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
