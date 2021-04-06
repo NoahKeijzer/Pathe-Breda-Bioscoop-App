@@ -50,11 +50,18 @@
             android:textSize="24dp"
             android:textColor="@color/white"/>
 
+        <TextView
+            android:id="@+id/tv_current_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:layout_marginTop="30dp"/>
         <SeekBar
             android:id="@+id/simpleSeeker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="60dp"

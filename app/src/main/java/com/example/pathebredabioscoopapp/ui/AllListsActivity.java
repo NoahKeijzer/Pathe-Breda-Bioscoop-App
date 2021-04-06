@@ -33,7 +33,6 @@ public class AllListsActivity extends AppCompatActivity implements FilmListAPITa
     private ArrayList<FilmList> filmList = new ArrayList<>();
     private RecyclerView personalListRecyclerView;
     private ListAdapter personalListAdapter;
-    private FilmAdapter filmAdapter;
     private final String PREFS = "MyPrefs";
 
     @Override

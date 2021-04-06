@@ -39,6 +39,9 @@
         <activity android:name=".ui.NewListsActivity">
 
         </activity>
+        <activity android:name=".ui.NewReviewActivity">
+
+        </activity>
     </application>
 
 </manifest>
