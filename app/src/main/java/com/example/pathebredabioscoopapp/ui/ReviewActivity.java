@@ -30,6 +30,7 @@ public class ReviewActivity extends AppCompatActivity implements ReviewsAPITask.
     private ReviewAdapter reviewAdapter;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
+    private TextView mTitle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +40,8 @@ public class ReviewActivity extends AppCompatActivity implements ReviewsAPITask.
         layoutManager = new LinearLayoutManager(this);
         recyclerView = findViewById(R.id.rv_general_recyclerview);
         recyclerView.setLayoutManager(layoutManager);
+        mTitle = findViewById(R.id.tv_general_recyclerview_title);
+        mTitle.setText("Reviews");
 
         film = (Films) getIntent().getSerializableExtra("REVIEW_NAME");
 
