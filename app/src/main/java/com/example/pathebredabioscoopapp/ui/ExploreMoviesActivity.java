@@ -49,7 +49,8 @@ public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPIT
         mTitleText.setText("Populair movies");
         recyclerView = findViewById(R.id.rv_general_recyclerview);
         recyclerView.setLayoutManager(layoutManager);
-        filmAdapter = new FilmAdapter(fullFilmList);
+        int layoutIdForListItem = R.layout.explore_list_item;
+        filmAdapter = new FilmAdapter(fullFilmList, layoutIdForListItem);
         recyclerView.setAdapter(filmAdapter);
 
         new FilmAPITask(this).execute();
@@ -60,14 +61,17 @@ public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPIT
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_explore_list,menu);
-        searchFilm = new SearchFilm(fullFilmList, filmAdapter);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         this.filterFilm = new FilterFilm(filteredFilmList, fullFilmList, filmAdapter);
+        this.sortFilm = new SortFilm(fullFilmList, filmAdapter);
+        this.searchFilm = new SearchFilm(fullFilmList, filmAdapter);
         switch(item.getItemId()) {
+            case R.id.action_sort:
+                return true;
             case R.id.filter_on_genre_action:
                 this.filterFilm.getFilter().filter("Action");
                 return true;
@@ -124,6 +128,24 @@ public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPIT
                 return true;
             case R.id.filter_on_genre_western:
                 this.filterFilm.getFilter().filter("Western");
+                return true;
+            case R.id.sort_a_to_z:
+                this.sortFilm.getFilter().filter("sortZtoA");
+                return true;
+            case R.id.sort_z_to_a:
+                this.sortFilm.getFilter().filter("sortZtoA");
+                return true;
+            case R.id.sort_high_to_low:
+                this.sortFilm.getFilter().filter("sortRatingHigh");
+                return true;
+            case R.id.sort_low_to_high:
+                this.sortFilm.getFilter().filter("sortRatingLow");
+                return true;
+            case R.id.sort_new_to_old:
+                this.sortFilm.getFilter().filter("sortNewToOld");
+                return true;
+            case R.id.sort_old_to_new:
+                this.sortFilm.getFilter().filter("sortOldToNew");
                 return true;
             case R.id.search:
                 SearchView searchView = (SearchView) item.getActionView();

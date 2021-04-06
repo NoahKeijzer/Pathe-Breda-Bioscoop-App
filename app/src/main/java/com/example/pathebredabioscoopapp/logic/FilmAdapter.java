@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,22 +17,31 @@ import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.domain.Films;
 import com.example.pathebredabioscoopapp.ui.AllListsActivity;
 import com.example.pathebredabioscoopapp.ui.DetailActivity;
-import com.example.pathebredabioscoopapp.ui.ExploreMoviesActivity;
-import com.example.pathebredabioscoopapp.ui.PersonalListActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder> implements Serializable {
     private final String TAG = getClass().getSimpleName();
     private List<Films> filmList;
-    private AllListsActivity allListsActivity = new AllListsActivity();
+    private ArrayList<Films> fullFilmList;
     public static final String BASE_POSTER_PATH_URL = "https://image.tmdb.org/t/p/w500";
+    private int layoutIdForListItem;
+    private FilmList filmListObject;
 
-    public FilmAdapter(List filmList) {
+    public FilmAdapter(List filmList, int layoutIdForListItem, FilmList filmListObject) {
         Log.d(TAG, "FilmAdapter constructor is aangeroepen.");
         this.filmList = filmList;
+        this.layoutIdForListItem = layoutIdForListItem;
+        this.filmListObject = filmListObject;
+    }
+
+    public FilmAdapter(ArrayList<Films> fullFilmList, int layoutIdForListItem) {
+        Log.d(TAG, "FilmAdapter constructor is aangeroepen.");
+        this.filmList = fullFilmList;
+        this.layoutIdForListItem = layoutIdForListItem;
     }
 
     @NonNull
@@ -42,12 +50,10 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
         Log.d(TAG, "onCreateViewHolder() is aangeroepen.");
 
         Context context = parent.getContext();
-
-        int layoutIdForListItem = R.layout.explore_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
 
-        View view = inflater.inflate(layoutIdForListItem, parent, shouldAttachToParentImmediately);
+        View view = inflater.inflate(this.layoutIdForListItem, parent, shouldAttachToParentImmediately);
         return new FilmViewHolder(view);
     }
 
@@ -80,12 +86,6 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
 
     @Override
     public int getItemCount() {
-
-        if (null == filmList) {
-            Log.d(TAG, "getItemCount(): Er zijn 0 items.");
-            return 0;
-        }
-
         Log.d(TAG, "getItemCount(): Er zijn " + filmList.size() + " items.");
         return filmList.size();
     }
@@ -111,9 +111,25 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
             mGenreText = (TextView) itemView.findViewById(R.id.tv_movie_genre);
             mReleaseText = (TextView) itemView.findViewById(R.id.tv_movie_release_year);
             mLengthText = (TextView) itemView.findViewById(R.id.tv_movie_length);
-            mDeleteButton = (ImageView) itemView.findViewById(R.id.iv_delete_icon);
-            mAddButton = (ImageView) itemView.findViewById(R.id.iv_add_icon);
+            if(layoutIdForListItem == R.layout.personal_explore_list_item) {
+                mDeleteButton = (ImageView) itemView.findViewById(R.id.iv_delete_icon);
+                mDeleteButton.setOnClickListener(new View.OnClickListener() {
 
+                    @Override
+                    public void onClick(View v) {
+                        int position = 1;
+                        for (Films movie : filmList) {
+                            if (mTitleText.getText().toString().equals(movie.getTitle())) {
+                                position = filmList.indexOf(movie);
+                            }
+                        }
+                        Films film = filmList.get(position);
+                        new RemoveFilmFromListTask(film, filmListObject).execute();
+                    }
+                });
+            }
+
+            mAddButton = (ImageView) itemView.findViewById(R.id.iv_add_icon);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -132,45 +148,6 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
                     context.startActivity(startActivity);
                 }
             });
-
-           /*mDeleteButton.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v){
-                   Log.d(TAG, "onClick() van een delete button is aangeroepen.");
-
-                   int position = 1;
-
-                   for (Films movie : filmList) {
-                       if (mTitleText.getText().toString().equals(movie.getTitle())) {
-                           position = filmList.indexOf(movie);
-                       }
-                   }
-
-                   Films film = filmList.get(position);
-
-                   filmList.remove(film);
-               }
-           });
-
-           mAddButton.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v){
-                   Log.d(TAG, "onClick() van een delete button is aangeroepen.");
-
-                   int position = 1;
-
-                   for (Films movie : filmList) {
-                       if (mTitleText.getText().toString().equals(movie.getTitle())) {
-                           position = filmList.indexOf(movie);
-                       }
-                   }
-
-                   Films film = filmList.get(position);
-
-
-
-               }
-           });*/
         }
     }
 }

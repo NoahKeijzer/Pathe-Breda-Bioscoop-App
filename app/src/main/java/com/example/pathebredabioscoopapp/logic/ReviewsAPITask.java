@@ -19,14 +19,16 @@ import static com.example.pathebredabioscoopapp.logic.FilmAPITask.BASE_URL;
 
 public class ReviewsAPITask extends AsyncTask<String, Void, ArrayList<Reviews>> {
     private final String TAG = getClass().getSimpleName();
+    private Films film;
     private ReviewsListener listener;
 
-    public ReviewsAPITask(ReviewsListener listener) {
+    public ReviewsAPITask(ReviewsListener listener, Films film) {
         this.listener = listener;
+        this.film = film;
     }
 
     public String stringRequestReviewsMovies(int id) {
-        return BASE_URL + "movie/" + id + "/reviews?api_key=" + API_KEY + "&language=en-US&page=1";
+        return BASE_URL + "movie/" + film.getId() + "/reviews?api_key=" + API_KEY + "&language=en-US&page=1";
     }
 
     @Override
@@ -65,6 +67,13 @@ public class ReviewsAPITask extends AsyncTask<String, Void, ArrayList<Reviews>> 
             }
         }
         return null;
+    }
+
+    @Override
+    protected void onPostExecute(ArrayList<Reviews> reviews) {
+        super.onPostExecute(reviews);
+        listener.onReviewAvailable(reviews);
+
     }
 
     public interface ReviewsListener {

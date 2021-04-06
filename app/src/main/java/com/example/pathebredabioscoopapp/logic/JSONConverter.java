@@ -161,7 +161,7 @@ public class JSONConverter implements Serializable {
                 String picturePath = actorsJSON.getString(ACTOR_PICTURE);
                 String character = actorsJSON.getString(ACTOR_CHARACTER);
                 int id = actorsJSON.getInt(ACTOR_ID);
-                actors.add(new Actors(id, name, picturePath, character));
+                actors.add(new Actors(id, name, character, picturePath));
             }
 
         } catch (JSONException e) {
@@ -184,7 +184,7 @@ public class JSONConverter implements Serializable {
                 String authorUsername = jsonAuthorDetails.getString(REVIEW_USERNAME);
                 double rating = jsonAuthorDetails.getDouble(REVIEW_RATING);
                 String content = reviewJSONObject.getString(REVIEW_CONTENT);
-                int id = reviewJSONObject.getInt(REVIEW_ID);
+                String id = reviewJSONObject.getString(REVIEW_ID);
                 reviews.add(new Reviews(id, rating, name, authorUsername, content));
             }
         } catch (JSONException e) {

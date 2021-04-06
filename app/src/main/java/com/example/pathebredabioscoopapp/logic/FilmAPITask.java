@@ -22,12 +22,10 @@ import retrofit2.Call;
 public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> implements Serializable {
     public static final String API_KEY = "90104c23f74fdca587142d076b5df361";
     public static final String BASE_URL = "https://api.themoviedb.org/3/";
-    public static final String BASE_POSTER_PATH_URL = "https://image.tmdb.org/t/p/w500";
-    public static final String SESSION_ID = "db55b43e42578d56dabbe2e110797041090fc6e7";
     private final String TAG = getClass().getSimpleName();
+    private int id = 0;
     private JSONConverter jsonConverter;
     private FilmListener filmListener;
-    private int id = 0;
 
     public FilmAPITask(FilmListener filmListener) {
         this.filmListener = filmListener;
