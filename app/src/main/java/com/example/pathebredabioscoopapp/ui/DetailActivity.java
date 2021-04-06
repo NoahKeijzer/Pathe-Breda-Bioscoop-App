@@ -60,11 +60,6 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         setContentView(R.layout.activity_movie_detail);
         film = (Films) getIntent().getSerializableExtra("FILM_NAME");
         fillViews();
-
-        //layout = new LinearLayoutManager(this);
-        //mRecyclerView = findViewById(R.id.rv_reviews);
-        //mRecyclerView.setLayoutManager(layout);
-
     }
 
     public void fillViews() {
