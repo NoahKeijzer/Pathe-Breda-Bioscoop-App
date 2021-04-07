@@ -78,7 +78,7 @@
                 android:id="@+id/btn_new_review_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="90dp"
                 android:text="@string/action_cancel"/>
         </LinearLayout>
     </LinearLayout>
