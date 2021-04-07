@@ -27,7 +27,7 @@ public class FilterFilm {
 
         @Override
         public FilterResults performFiltering(CharSequence constraint) {
-            Log.d(TAG, "performFiltering is aangeroepen");
+ //           Log.d(TAG, "performFiltering is aangeroepen");
 
             FilterResults results = new FilterResults();
             String strConstraint = constraint.toString();

@@ -48,9 +48,20 @@ public class DeleteListTask extends AsyncTask<Integer, Void, Void> {
     }
 
     private void makeDelete(int filmListId) throws IOException {
-        URL url = new URL("https://api.themoviedb.org/3/list/" + filmListId + "?api_key=90104c23f74fdca587142d076b5df361&session_id=db55b43e42578d56dabbe2e110797041090fc6e7");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("DELETE");
-        listAdapter.notifyDataSetChanged();
+        try {
+            URL url = new URL("https://api.themoviedb.org/3/list/"+ filmListId +"?api_key=90104c23f74fdca587142d076b5df361&session_id=db55b43e42578d56dabbe2e110797041090fc6e7");
+            HttpURLConnection http = (HttpURLConnection)url.openConnection();
+            http.setRequestMethod("DELETE");
+            http.setRequestProperty("Accept", "*/*");
+            http.setRequestProperty("Authorization", "Bearer mt0dgHmLJMVQhvjpNXDyA83vA_PxH23Y");
+            System.out.println(http.getResponseCode() + " " + http.getResponseMessage());
+            http.disconnect();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

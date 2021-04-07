@@ -33,7 +33,7 @@ public class ReviewsAPITask extends AsyncTask<String, Void, ArrayList<Reviews>> 
 
     @Override
     protected ArrayList<Reviews> doInBackground(String... strings) {
-        Log.d(TAG, "doInBackground is aangeroepen");
+   //     Log.d(TAG, "doInBackground is aangeroepen");
         //Create/get URL
         HttpURLConnection urlConnection = null;
         URL urlGetMovie = null;

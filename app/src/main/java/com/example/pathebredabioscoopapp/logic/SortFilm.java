@@ -35,7 +35,7 @@ public class SortFilm {
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            Log.d(TAG, "performFiltering is aangeroepen");
+       //     Log.d(TAG, "performFiltering is aangeroepen");
             ArrayList<Films> filteredList = new ArrayList<>();
 
             String strConstraint = constraint.toString();
