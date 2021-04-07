@@ -58,7 +58,7 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> imple
 
     @Override
     protected ArrayList<Films> doInBackground(String... strings) {
-        Log.d(TAG, "doInBackground is aangeroepen");
+ //       Log.d(TAG, "doInBackground is aangeroepen");
         ArrayList<Films> resultList = new ArrayList<>();
         //Create/get URL
         HttpURLConnection urlConnection = null;
@@ -79,7 +79,7 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> imple
             boolean hasInput = scanner.hasNext();
             if (hasInput) {
                 String response = scanner.next();
-                Log.d(TAG, "response: " + response);
+                //      Log.d(TAG, "response: " + response);
                 jsonConverter = new JSONConverter(response);
                 if(id == 0){
                     resultList = jsonConverter.convertFilm();
@@ -128,7 +128,7 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> imple
 
                 if (scanner.hasNext()) {
                     String response = scanner.next();
-                    Log.d(TAG, "response: " + response);
+                   // Log.d(TAG, "response: " + response);
                     JSONConverter jsonConverter = new JSONConverter(response);
                     String genre = jsonConverter.convertGenreFilm();
                     String trailer = jsonConverter.convertTrailer();
@@ -163,7 +163,7 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> imple
 
                 if (scanner.hasNext()) {
                     String response = scanner.next();
-                    Log.d(TAG, "response: " + response);
+//                    Log.d(TAG, "response: " + response);
                     JSONConverter jsonConverter = new JSONConverter(response);
                     ArrayList<Actors> actors = jsonConverter.convertActorsFilm();
                     x.setActors(actors);

@@ -49,7 +49,7 @@ public class SearchFilm {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            Log.d(TAG, "publishResults() is aangeroepen");
+    //        Log.d(TAG, "publishResults() is aangeroepen");
             filmList.clear();
             filmList.addAll((ArrayList) results.values);
             filmAdapter.notifyDataSetChanged();

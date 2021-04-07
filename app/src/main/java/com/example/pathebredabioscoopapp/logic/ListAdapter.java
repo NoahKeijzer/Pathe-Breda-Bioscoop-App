@@ -29,14 +29,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     private ListAdapter listAdapter = this;
 
     public ListAdapter(List list){
-        Log.d(TAG, "ListAdapter constructor is aangeroepen.");
+ //       Log.d(TAG, "ListAdapter constructor is aangeroepen.");
         this.list = list;
     }
 
     @NonNull
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d(TAG, "onCreateViewHolder() is aangeroepen.");
+ //       Log.d(TAG, "onCreateViewHolder() is aangeroepen.");
+
         Context context = parent.getContext();
         int layoutIdForListItem = R.layout.personal_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -47,7 +48,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ListAdapter.ListViewHolder holder, int position) {
-        Log.d(TAG, "onBind is aangeroepen");
+  //      Log.d(TAG, "onBind is aangeroepen");
+
         FilmList filmList = list.get(position);
         int id = filmList.getId();
         holder.mListName.setText(filmList.getName());
@@ -56,10 +58,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     @Override
     public int getItemCount() {
         if (null == list){
-            Log.d(TAG, "getItemCount(): Er zijn 0 items.");
+  //          Log.d(TAG, "getItemCount(): Er zijn 0 items.");
             return 0;
         }
-        Log.d(TAG,  "getItemCount(): Er zijn "+ list.size() + " items.");
+
+   //     Log.d(TAG,  "getItemCount(): Er zijn "+ list.size() + " items.");
         return list.size();
     }
 
@@ -74,7 +77,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
 
         public ListViewHolder(@NonNull View view) {
             super(view);
-            Log.d(TAG, "ViewHolder constructor is aangeroepen.");
+
+    //        Log.d(TAG, "ViewHolder constructor is aangeroepen.");
+
             mListName = (TextView) itemView.findViewById(R.id.tv_list_name);
             mDeleteButton = (ImageView) itemView.findViewById(R.id.iv_delete_icon);
             mDeleteButton.setOnClickListener(new View.OnClickListener() {
@@ -89,14 +94,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
                         }
                     }
                     FilmList filmList = list.get(position);
+                    Context context = v.getContext();
                     new DeleteListTask(filmList, listAdapter).execute();
+                    Class destinationActivity = AllListsActivity.class;
+                    Intent startChildActivityIntent = new Intent(context, destinationActivity);
+                    context.startActivity(startChildActivityIntent);
                 }
             });
             mShareButton = (ImageView) itemView.findViewById(R.id.iv_share_icon);
             mShareButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "onClick() van een view is aangeroepen.");
+  //                  Log.d(TAG, "onClick() van een view is aangeroepen.");
                     int position = 1;
                     for (FilmList personalList : list) {
                         if (mListName.getText().toString().equals(personalList.getName())) {
@@ -117,7 +126,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "onClick() van een view is aangeroepen.");
+   //                 Log.d(TAG, "onClick() van een view is aangeroepen.");
                     int position = 1;
                     for (FilmList personalList : list) {
                         if (mListName.getText().toString().equals(personalList.getName())) {

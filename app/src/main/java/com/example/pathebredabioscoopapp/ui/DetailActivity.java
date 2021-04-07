@@ -156,6 +156,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
                 Intent startActivity = new Intent(context, destinationActivity);
                 startActivity.putExtra("ADD_TO_LIST", film);
                 context.startActivity(startActivity);
+                break;
             case R.id.action_share:
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
@@ -163,6 +164,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
                 sendIntent.setType("text/plain");
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 context.startActivity(shareIntent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

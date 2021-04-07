@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pathebredabioscoopapp.R;
 import com.example.pathebredabioscoopapp.logic.CreateNewListTask;
+import com.example.pathebredabioscoopapp.logic.SortFilm;
 
 import java.io.IOException;
 
@@ -38,6 +39,7 @@ public class NewListsActivity extends AppCompatActivity {
     private RadioGroup mRadioGroup;
     private Button mbtnSave;
     private Button mbtnCancel;
+    private final OkHttpClient client = new OkHttpClient();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,15 +67,6 @@ public class NewListsActivity extends AppCompatActivity {
 
             }
         });
-
-        mbtnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-
     }
 
     @Override
