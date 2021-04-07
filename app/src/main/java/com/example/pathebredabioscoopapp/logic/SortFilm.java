@@ -135,6 +135,31 @@ public class SortFilm {
         return sortedList;
     }
 
+    public ArrayList<Films> sortRating(LinkedHashMap<String, Double> sortedHashMap) {
+        ArrayList<Films> sortedList = new ArrayList<>();
+        for (String i : sortedHashMap.keySet()) {
+            for (Films j : filmList) {
+                if (i.equals(j.getTitle())) {
+                    sortedList.add(j);
+                }
+            }
+        }
+        return sortedList;
+    }
+
+    public ArrayList<Films> sortReleaseDate(LinkedHashMap<String, Date> stringDateLinkedHashMap)  {
+        ArrayList<Films> sortedList = new ArrayList<>();
+        Collections.sort(this.filmDates);
+        for (String i : stringDateLinkedHashMap.keySet()) {
+            for (Films j : filmList) {
+                if (i.equals(j.getTitle())) {
+                    sortedList.add(j);
+                }
+            }
+        }
+        return sortedList;
+    }
+
     public LinkedHashMap<String, Double> sortHashMapByValuesLowToHigh(HashMap<String, Double> passedMap) {
         List<String> mapKeys = new ArrayList<>(passedMap.keySet());
         List<Double> mapValues = new ArrayList<>(passedMap.values());
@@ -191,31 +216,6 @@ public class SortFilm {
             }
         }
         return sortedMap;
-    }
-
-    public ArrayList<Films> sortRating(LinkedHashMap<String, Double> sortedHashMap) {
-        ArrayList<Films> sortedList = new ArrayList<>();
-        for (String i : sortedHashMap.keySet()) {
-            for (Films j : filmList) {
-                if (i.equals(j.getTitle())) {
-                    sortedList.add(j);
-                }
-            }
-        }
-        return sortedList;
-    }
-
-    public ArrayList<Films> sortReleaseDate(LinkedHashMap<String, Date> stringDateLinkedHashMap) throws ParseException {
-        ArrayList<Films> sortedList = new ArrayList<>();
-        Collections.sort(this.filmDates);
-        for (String i : stringDateLinkedHashMap.keySet()) {
-            for (Films j : filmList) {
-                if (i.equals(j.getTitle())) {
-                    sortedList.add(j);
-                }
-            }
-        }
-        return sortedList;
     }
 
     public LinkedHashMap<String, Date> sortHashMapDateByValuesHighToLow(HashMap<String, Date> passedMap) {

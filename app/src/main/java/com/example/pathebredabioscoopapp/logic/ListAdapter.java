@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pathebredabioscoopapp.R;
 import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.domain.Films;
+import com.example.pathebredabioscoopapp.ui.AllListsActivity;
 import com.example.pathebredabioscoopapp.ui.DetailActivity;
 import com.example.pathebredabioscoopapp.ui.PersonalListActivity;
 
@@ -87,6 +88,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             mDeleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     Log.d(TAG, "onClick() van een view is aangeroepen.");
                     int position = 1;
                     for (FilmList personalList : list) {
