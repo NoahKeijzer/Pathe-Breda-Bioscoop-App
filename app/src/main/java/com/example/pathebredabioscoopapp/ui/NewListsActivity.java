@@ -39,7 +39,6 @@ public class NewListsActivity extends AppCompatActivity {
     private Spinner mSpinner;
     private Button mbtnSave;
     private Button mbtnCancel;
-    private final OkHttpClient client = new OkHttpClient();
     private final static String AZ = "A -> Z";
     private final static String ZA = "Z -> A";
     private final static String RHL = "Rating High -> Low";
@@ -82,6 +81,15 @@ public class NewListsActivity extends AppCompatActivity {
 
             }
         });
+
+        mbtnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
     }
 
     @Override

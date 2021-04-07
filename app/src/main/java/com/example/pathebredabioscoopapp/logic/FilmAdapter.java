@@ -17,6 +17,7 @@ import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.domain.Films;
 import com.example.pathebredabioscoopapp.ui.AllListsActivity;
 import com.example.pathebredabioscoopapp.ui.DetailActivity;
+import com.example.pathebredabioscoopapp.ui.PersonalListActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
