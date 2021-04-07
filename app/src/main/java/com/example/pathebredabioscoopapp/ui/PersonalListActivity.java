@@ -1,5 +1,7 @@
 package com.example.pathebredabioscoopapp.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,6 +30,7 @@ import com.example.pathebredabioscoopapp.logic.FilterFilm;
 import com.example.pathebredabioscoopapp.logic.RemoveFilmFromListTask;
 import com.example.pathebredabioscoopapp.logic.SearchFilm;
 import com.example.pathebredabioscoopapp.logic.SortFilm;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -62,7 +65,12 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
         new FilmAPITask(this, filmlist.getId()).execute();
 
         if (film != null && filmlist != null) {
-            new AddToListTask(film, filmlist, filmAdapter).execute();
+            finish();
+            new AddToListTask(film, filmlist, filmAdapter, this).execute();
+            Class destinationActivity = PersonalListActivity.class;
+            Intent startChildActivityIntent = new Intent(this, destinationActivity);
+            startChildActivityIntent.putExtra("LIST_NAME",  filmlist);
+            this.startActivity(startChildActivityIntent);
         }
     }
 

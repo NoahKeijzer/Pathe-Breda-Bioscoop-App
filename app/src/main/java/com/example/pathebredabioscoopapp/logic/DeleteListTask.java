@@ -1,9 +1,16 @@
 package com.example.pathebredabioscoopapp.logic;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.ProgressBar;
 
+import com.example.pathebredabioscoopapp.R;
 import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.domain.Films;
+import com.example.pathebredabioscoopapp.ui.AllListsActivity;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -24,6 +31,7 @@ public class DeleteListTask extends AsyncTask<Integer, Void, Void> {
     private ListAdapter listAdapter;
     private int filmListId;
 
+
     public DeleteListTask(FilmList filmlist, ListAdapter listAdapter) {
         this.filmListId = filmlist.getId();
         this.listAdapter = listAdapter;
@@ -40,10 +48,9 @@ public class DeleteListTask extends AsyncTask<Integer, Void, Void> {
     }
 
     private void makeDelete(int filmListId) throws IOException {
-        URL url = new URL("https://api.themoviedb.org/3/list/"+ filmListId +"?api_key=90104c23f74fdca587142d076b5df361&session_id=db55b43e42578d56dabbe2e110797041090fc6e7");
+        URL url = new URL("https://api.themoviedb.org/3/list/" + filmListId + "?api_key=90104c23f74fdca587142d076b5df361&session_id=db55b43e42578d56dabbe2e110797041090fc6e7");
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("DELETE");
-        int responseCode = connection.getResponseCode();
         listAdapter.notifyDataSetChanged();
     }
 }

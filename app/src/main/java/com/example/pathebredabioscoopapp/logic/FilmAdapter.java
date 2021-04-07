@@ -17,6 +17,7 @@ import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.domain.Films;
 import com.example.pathebredabioscoopapp.ui.AllListsActivity;
 import com.example.pathebredabioscoopapp.ui.DetailActivity;
+import com.example.pathebredabioscoopapp.ui.PersonalListActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
@@ -130,6 +131,11 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
                         }
                         Films film = filmList.get(position);
                         new RemoveFilmFromListTask(film, filmListObject).execute();
+                        Context context = v.getContext();
+                        Class destinationActivity = PersonalListActivity.class;
+                        Intent startActivity = new Intent(context, destinationActivity);
+                        startActivity.putExtra("LIST_NAME", filmListObject);
+                        context.startActivity(startActivity);
                     }
                 });
             }

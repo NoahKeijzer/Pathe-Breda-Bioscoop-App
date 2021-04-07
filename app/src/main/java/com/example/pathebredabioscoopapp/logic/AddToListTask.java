@@ -8,6 +8,10 @@ import android.widget.Toast;
 import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.domain.Films;
 import com.example.pathebredabioscoopapp.ui.AllListsActivity;
+import com.example.pathebredabioscoopapp.ui.DetailActivity;
+import com.example.pathebredabioscoopapp.ui.ExploreMoviesActivity;
+import com.example.pathebredabioscoopapp.ui.PersonalListActivity;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 
@@ -23,11 +27,13 @@ public class AddToListTask extends AsyncTask<Integer, Void, Void>  {
     private FilmAdapter filmAdapter;
     private int filmId;
     private int filmListId;
+    private Context context;
 
-    public AddToListTask(Films film, FilmList filmlist, FilmAdapter filmAdapter) {
+    public AddToListTask(Films film, FilmList filmlist, FilmAdapter filmAdapter, Context context) {
         this.filmId = film.getId();
         this.filmListId = filmlist.getId();
         this.filmAdapter = filmAdapter;
+        this.context = context;
     }
 
     @Override
@@ -48,7 +54,10 @@ public class AddToListTask extends AsyncTask<Integer, Void, Void>  {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+            if (!response.isSuccessful()) {
+                throw new IOException("Unexpected code " + response);
+
+            }
 
             Headers responseHeaders = response.headers();
             for (int i = 0; i < responseHeaders.size(); i++) {
@@ -58,5 +67,10 @@ public class AddToListTask extends AsyncTask<Integer, Void, Void>  {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
     }
 }
