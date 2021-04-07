@@ -41,13 +41,13 @@ public class NewReviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_review);
         mNewReviewTitle = findViewById(R.id.tv_new_review_title);
-        mNewReviewTitle.setText("New Review");
+        mNewReviewTitle.setText(R.string.new_review);
         mNewReviewDescription = findViewById(R.id.et_review_description);
         reviewDescriptionString = String.valueOf(mNewReviewDescription.getText());
         mGiveRating = findViewById(R.id.tv_give_rating_title);
         mCurrentRate = findViewById(R.id.tv_current_rating);
         mRatingSeekbar = findViewById(R.id.simpleSeeker);
-        mCurrentRate.setText("Rating: " + mRatingSeekbar.getProgress());
+        mCurrentRate.setText(R.string.review_updating_rating + mRatingSeekbar.getProgress());
         film = (Films) getIntent().getSerializableExtra(FILM_INTENT);
 
         mRatingSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -56,14 +56,14 @@ public class NewReviewActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
                 double p = progressValue;
                 progress = (p/10);
-                mCurrentRate.setText("Rating: " + progress);
+                mCurrentRate.setText("" + R.string.review_updating_rating + progress);
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {}
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                mCurrentRate.setText("Rating: " + progress);
+                mCurrentRate.setText("" + R.string.review_updating_rating + progress);
             }
         });
 

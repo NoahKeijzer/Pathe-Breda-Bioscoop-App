@@ -11,16 +11,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="115dp"
         android:layout_height="match_parent"
-        app:cardCornerRadius="20dp"
-        >
+        app:cardCornerRadius="20dp">
     <ImageView
         android:id="@+id/iv_poster_image"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:background="@drawable/custommovieborder"
-        />
+        android:background="@drawable/custommovieborder"/>
     </androidx.cardview.widget.CardView>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +29,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:layout_marginLeft="14dp"
-            android:text="sampletext"
             android:textSize="18sp"
             android:layout_gravity="center"/>
 
@@ -49,7 +45,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
                 android:layout_marginLeft="14dp"
-                android:text="sampletext"
                 android:textSize="14sp"
                 android:layout_gravity="left"/>
             <TextView
@@ -58,7 +53,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
                 android:layout_marginLeft="14dp"
-                android:text="sampletext"
                 android:textSize="14sp"
                 android:layout_gravity="right"/>
         </LinearLayout>
@@ -75,7 +69,6 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:layout_marginLeft="14dp"
-                    android:text="sampletext"
                     android:textSize="14sp"
                     android:layout_gravity="left"/>
 
@@ -85,17 +78,14 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:layout_marginLeft="14dp"
-                    android:text="sampletext"
                     android:textSize="14sp"
                     android:layout_gravity="right"/>
         </LinearLayout>
-
         <GridLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="horizontal"
             android:layout_marginTop="6dp">
-
             <ImageView
                 android:id="@+id/iv_delete_icon"
                 android:layout_width="24dp"
@@ -103,7 +93,6 @@
                 android:layout_marginLeft="30dp"
                 android:layout_gravity="left"
                 android:src="@drawable/delete_icon" />
-
             <ImageView
                 android:id="@+id/iv_add_icon"
                 android:layout_width="24dp"
@@ -112,7 +101,5 @@
                 android:layout_marginRight="20dp"
                 android:src="@drawable/add_icon" />
         </GridLayout>
-
-
     </LinearLayout>
 </LinearLayout>

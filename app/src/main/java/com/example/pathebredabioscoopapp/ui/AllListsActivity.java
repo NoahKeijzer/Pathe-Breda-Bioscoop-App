@@ -48,7 +48,7 @@ public class AllListsActivity extends AppCompatActivity implements FilmListAPITa
         personalListRecyclerView.setLayoutManager(layoutManager);
         personalListAdapter = new ListAdapter(filmList);
         personalListRecyclerView.setAdapter(personalListAdapter);
-        mTitleText.setText("Personal lists");
+        mTitleText.setText(R.string.personal_list);
         Films film = (Films) getIntent().getSerializableExtra("ADD_TO_LIST");
         if (film != null) {
             personalListAdapter.setFilm(film);

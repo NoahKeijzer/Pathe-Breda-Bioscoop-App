@@ -15,10 +15,7 @@ public class NewRatingReviewTask extends AsyncTask<String, Void, Void> {
     private final OkHttpClient client = new OkHttpClient();
     private String value;
     private String listNumber;
-
     private String API_URL;
-
-
 
     @Override
     protected Void doInBackground(String... strings) {

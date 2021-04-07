@@ -37,13 +37,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(TAG, "onCreateViewHolder() is aangeroepen.");
-
         Context context = parent.getContext();
-
         int layoutIdForListItem = R.layout.personal_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
-
         View view = inflater.inflate(layoutIdForListItem, parent, shouldAttachToParentImmediately);
         return new ListAdapter.ListViewHolder(view);
     }
@@ -51,7 +48,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     @Override
     public void onBindViewHolder(@NonNull ListAdapter.ListViewHolder holder, int position) {
         Log.d(TAG, "onBind is aangeroepen");
-
         FilmList filmList = list.get(position);
         int id = filmList.getId();
         holder.mListName.setText(filmList.getName());
@@ -59,12 +55,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
 
     @Override
     public int getItemCount() {
-
         if (null == list){
             Log.d(TAG, "getItemCount(): Er zijn 0 items.");
             return 0;
         }
-
         Log.d(TAG,  "getItemCount(): Er zijn "+ list.size() + " items.");
         return list.size();
     }
@@ -80,9 +74,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
 
         public ListViewHolder(@NonNull View view) {
             super(view);
-
             Log.d(TAG, "ViewHolder constructor is aangeroepen.");
-
             mListName = (TextView) itemView.findViewById(R.id.tv_list_name);
             mDeleteButton = (ImageView) itemView.findViewById(R.id.iv_delete_icon);
             mDeleteButton.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +92,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
                     new DeleteListTask(filmList, listAdapter).execute();
                 }
             });
-
             mShareButton = (ImageView) itemView.findViewById(R.id.iv_share_icon);
             mShareButton.setOnClickListener(new View.OnClickListener() {
                 @Override

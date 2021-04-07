@@ -26,7 +26,6 @@ public class SearchFilm {
         protected FilterResults performFiltering(CharSequence constraint) {
             ArrayList<Films> filteredList = new ArrayList<>();
             FilterResults results = new FilterResults();
-
             if (fullFilmList.isEmpty()) {
                 fullFilmList.addAll(filmList);
             }

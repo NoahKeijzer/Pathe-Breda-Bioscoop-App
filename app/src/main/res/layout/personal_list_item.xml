@@ -12,25 +12,19 @@
         android:id="@+id/iv_delete_icon"
         android:layout_height="24dp"
         android:layout_width="24dp"
-        android:src="@drawable/delete_icon"
-        />
-
+        android:src="@drawable/delete_icon"/>
     <TextView
         android:id="@+id/tv_list_name"
         android:layout_width="260dp"
         android:layout_height="match_parent"
-        android:text="@string/item_list_placeholder"
         android:fontFamily="monospace"
         android:gravity="center"
         android:layout_marginLeft="10dp"
-        android:textSize="20sp"
-        />
+        android:textSize="20sp"/>
     <ImageView
         android:id="@+id/iv_share_icon"
         android:layout_height="24dp"
         android:layout_width="24dp"
         android:src="@drawable/share_icon"
-        android:layout_marginLeft="10dp"
-        />
-
+        android:layout_marginLeft="10dp"/>
 </LinearLayout>

@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="TestUsername"
         android:textSize="18sp"
         android:paddingBottom="10dp"/>
     <TextView
@@ -20,9 +19,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="TestDescription"
         android:textSize="14sp"
-        android:layout_margin="10dp"
-        />
-
+        android:layout_margin="10dp"/>
 </LinearLayout>

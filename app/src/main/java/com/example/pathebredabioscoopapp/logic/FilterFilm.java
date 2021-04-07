@@ -98,7 +98,6 @@ public class FilterFilm {
     public Date parseToDate(String strConstraint){
         String sDate = strConstraint;
         Date date = null;
-
         try {
             date = new SimpleDateFormat("yyyy/MM/dd").parse(sDate);
             return date;
@@ -109,22 +108,18 @@ public class FilterFilm {
     }
 
     public ArrayList<Films> filterGenre(String genreConstraint){
-
         for(Films film: this.fullFilmList){
             if(film.getGenre().equals(genreConstraint)){
                 this.filteredFilmList.add(film);
             }
         }
-
         if(this.filteredFilmList != null){
             return this.filteredFilmList;
         }
-
         return null;
     }
 
     public ArrayList<Films> filterRating(Double ratingConstraint){
-
         for(Films film: this.fullFilmList){
             if(film.getRating() == ratingConstraint){
                 this.filteredFilmList.add(film);
@@ -145,7 +140,6 @@ public class FilterFilm {
                 this.filteredFilmList.add(film);
             }
         }
-
         if(this.filteredFilmList != null){
             return this.filteredFilmList;
         }

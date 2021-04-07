@@ -53,11 +53,10 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
     @Override
     public void onBindViewHolder(@NonNull ReviewAdapter.ReviewViewHolder holder, int position) {
         Log.d(TAG, "onBind is aangeroepen");
-
         Reviews review = reviewList.get(position);
 
-        holder.mUsername.setText("Username: " + String.valueOf(review.getUsername()));
-        holder.mContent.setText("Review: \n\n" + String.valueOf(review.getContent()));
+        holder.mUsername.setText("" + R.string.username + ": " + String.valueOf(review.getUsername()));
+        holder.mContent.setText("" + R.string.review + ": " + "\n\n" + String.valueOf(review.getContent()));
     }
 
     @Override
@@ -78,9 +77,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
         public ReviewViewHolder(@NonNull View view) {
             super(view);
-
             Log.d(TAG, "ViewHolder constructor is aangeroepen.");
-
             mUsername = (TextView) itemView.findViewById(R.id.tv_username);
             mContent = (TextView) itemView.findViewById(R.id.tv_review_description);
 
