@@ -9,8 +9,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.pathebredabioscoopapp.R;
@@ -44,6 +47,12 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
     private SortFilm sortFilm;
     private FilterFilm filterFilm;
     private SearchFilm searchFilm;
+    private ImageView mDeleteButton;
+    private SeekBar ratingSeekbar;
+    private DatePicker datePicker;
+    private Double seekValue ;
+    private Button buttonSeekbar;
+    private TextView seekbarProgress;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,6 +97,9 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
         this.searchFilm = new SearchFilm(fullFilmList, filmAdapter);
         switch (item.getItemId()) {
             case R.id.action_sort:
+                return true;
+            case R.id.filter_on_genre_all:
+                this.filterFilm.getFilter().filter("All");
                 return true;
             case R.id.filter_on_genre_action:
                 this.filterFilm.getFilter().filter("Action");
@@ -145,6 +157,39 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
                 return true;
             case R.id.filter_on_genre_western:
                 this.filterFilm.getFilter().filter("Western");
+                return true;
+            case R.id.filter_on_rating:
+                seekbarProgress = findViewById(R.id.sb_progress);
+                ratingSeekbar = findViewById(R.id.sb_seekbar);
+                buttonSeekbar = findViewById(R.id.bt_seekbar_execute);
+                seekbarProgress.setVisibility(SeekBar.VISIBLE);
+                ratingSeekbar.setVisibility(SeekBar.VISIBLE);
+                buttonSeekbar.setVisibility(SeekBar.VISIBLE);
+                ratingSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    double progressValue = 0;
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        double p = progress;
+                        progressValue = (p/10);
+                        seekValue = progressValue;
+                        seekbarProgress.setText("Rating: " + progressValue);
+                    }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {}
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        seekValue = progressValue;
+                        seekbarProgress.setText("Rating: " + progressValue);
+                    }
+                });
+                return true;
+            case R.id.bt_seekbar_execute:
+                String strSeekValue = Double.toString(seekValue);
+                this.filterFilm.getFilter().filter(strSeekValue);
+                return true;
+            case R.id.filter_on_date:
+                datePicker = findViewById(R.id.dp_date_picker);
+                datePicker.setVisibility(SeekBar.VISIBLE);
                 return true;
             case R.id.sort_a_to_z:
                 this.sortFilm.getFilter().filter("sortZtoA");

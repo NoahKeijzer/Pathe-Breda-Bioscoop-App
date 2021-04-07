@@ -21,6 +21,9 @@
 
                 <menu>
                     <item
+                        android:id="@+id/filter_on_genre_all"
+                        android:title="All"/>
+                    <item
                         android:id="@+id/filter_on_genre_action"
                         android:title="Action"/>
                     <item
@@ -83,13 +86,8 @@
             <item
                 android:id="@+id/filter_on_rating"
                 android:title="Rating"
-                app:showAsAction="never">
+                app:showAsAction="never"/>
 
-                <menu>
-                    <seekbar
-                        android:id="@+id/filter_on_rating_seekbar"/>
-                </menu>
-            </item>
             <item
                 android:id="@+id/filter_on_date"
                 android:title="Date"
