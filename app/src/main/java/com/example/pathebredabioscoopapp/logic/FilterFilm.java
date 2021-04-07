@@ -15,12 +15,14 @@ public class FilterFilm {
     private final String TAG = getClass().getSimpleName();
     private ArrayList<Films> filteredFilmList ;
     private ArrayList<Films> fullFilmList ;
+    private ArrayList<Films> entireFilmList;
     private FilmAdapter filmAdapter;
 
     public FilterFilm(ArrayList<Films> filteredFilmList, ArrayList<Films> fullFilmList, FilmAdapter filmAdapter){
         this.filteredFilmList = filteredFilmList;
         this.fullFilmList = fullFilmList;
         this.filmAdapter = filmAdapter;
+        this.entireFilmList = new ArrayList<>();
     }
 
     public Filter filter = new Filter() {
@@ -31,8 +33,14 @@ public class FilterFilm {
 
             FilterResults results = new FilterResults();
             String strConstraint = constraint.toString();
+            if(entireFilmList.isEmpty()){
+                entireFilmList.addAll(fullFilmList);
+            }
 
-
+            /*if (strConstraint.equals("All")) {
+                results.values = entireFilmList;
+                return results;
+            }*/
             if(isGenre(strConstraint)){
                 filterGenre(strConstraint);
             }else if(isRating(strConstraint)){
@@ -110,7 +118,7 @@ public class FilterFilm {
 
     public ArrayList<Films> filterGenre(String genreConstraint){
 
-        for(Films film: this.fullFilmList){
+        for(Films film: this.entireFilmList){
             if(film.getGenre().equals(genreConstraint)){
                 this.filteredFilmList.add(film);
             }
@@ -124,7 +132,7 @@ public class FilterFilm {
     }
 
     public ArrayList<Films> filterRating(Double ratingConstraint){
-
+        Log.d(TAG, "filterRating aangeroepen.");
         for(Films film: this.fullFilmList){
             if(film.getRating() == ratingConstraint){
                 this.filteredFilmList.add(film);
