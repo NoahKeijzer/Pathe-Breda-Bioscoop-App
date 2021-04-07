@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:columnCount="1"
     android:background="@drawable/review_border"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:layout_marginBottom="20dp">
     <TextView
         android:id="@+id/tv_username"
         android:layout_width="wrap_content"
