@@ -40,7 +40,12 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
 
     public FilmAdapter(ArrayList<Films> fullFilmList, int layoutIdForListItem) {
         Log.d(TAG, "FilmAdapter constructor is aangeroepen.");
-        this.filmList = fullFilmList;
+        if(this.filmList != null) {
+            this.filmList.clear();
+            this.filmList = fullFilmList;
+        }else {
+            this.filmList = fullFilmList;
+        }
         this.layoutIdForListItem = layoutIdForListItem;
     }
 

@@ -10,6 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 public class SortFilm {
 
@@ -17,14 +21,14 @@ public class SortFilm {
     private ArrayList<Films> filmList;
     private ArrayList<Films> fullFilmList = new ArrayList<>();
     private ArrayList<String> filmTitles = new ArrayList<>();
-    private ArrayList<Date> filmDates = new ArrayList<Date>();
+    private ArrayList<Date> filmDates = new ArrayList<>();
     private ArrayList<Double> filmRating = new ArrayList<>();
     private FilmAdapter filmAdapter;
 
     public SortFilm(ArrayList<Films> filmList, FilmAdapter filmAdapter) {
         this.filmList = filmList;
-        fullFilmList.addAll(filmList);
         this.filmAdapter = filmAdapter;
+        fullFilmList.addAll(filmList);
     }
 
     private Filter filter = new Filter() {
@@ -32,55 +36,39 @@ public class SortFilm {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             Log.d(TAG, "performFiltering is aangeroepen");
-
-            FilterResults results = new FilterResults();
-            String strConstraint = constraint.toString();
-
             ArrayList<Films> filteredList = new ArrayList<>();
 
-            if (fullFilmList.isEmpty()) {
-                fullFilmList.addAll(filmList);
+            String strConstraint = constraint.toString();
+
+            if (filmList.isEmpty()) {
+                filmList.addAll(fullFilmList);
             }
+
             if (strConstraint.equals("sortAtoZ")) {
                 getAllFilmTitles();
-                results.values = sortAtoZ();
-                return results;
+                filteredList = sortAtoZ();
             } else if (strConstraint.equals("sortZtoA")) {
                 getAllFilmTitles();
-                results.values = sortZtoA();
-                return results;
+                filteredList = sortZtoA();
             } else if (strConstraint.equals("sortRatingHigh")) {
-                getFilmRating();
-                results.values = sortRatingHigh();
-                return results;
+                filteredList = sortRating(sortHashMapByValuesHighToLow(getFilmRating()));
             } else if (strConstraint.equals("sortRatingLow")) {
-                getFilmRating();
-                results.values = sortRatingLow();
-                return results;
+                filteredList = sortRating(sortHashMapByValuesLowToHigh(getFilmRating()));
             } else if (strConstraint.equals("sortOldToNew")) {
                 try {
-                    getReleaseDateFilms();
-                    results.values = sortReleaseDateOld();
-                    return results;
+                    filteredList = sortReleaseDate(sortHashMapDateByValuesHighToLow(getReleaseDateFilms()));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
             } else if (strConstraint.equals("sortNewToOld")) {
                 try {
-                    getReleaseDateFilms();
-                    results.values = sortReleaseDateNew();
-                    return results;
+                    filteredList = sortReleaseDate(sortHashMapDateByValuesLowToHigh(getReleaseDateFilms()));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
             }
-            if (constraint == null || constraint.length() == 0) {
-                filteredList.addAll(fullFilmList);
-                results.values = fullFilmList;
-                return results;
-            }
-
-            results.values = fullFilmList;
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
             return results;
         }
 
@@ -96,11 +84,13 @@ public class SortFilm {
         return filter;
     }
 
-    public ArrayList<Date> getReleaseDateFilms() throws ParseException {
+    public HashMap<String, Date> getReleaseDateFilms() throws ParseException {
+        HashMap<String, Date> filmReleaseDate = new HashMap<>();
+
         for (Films x : filmList) {
-            filmDates.add(new SimpleDateFormat("yyyy-MM-dd").parse(x.getReleaseDate()));
+            filmReleaseDate.put(x.getTitle(), new SimpleDateFormat("yyyy-MM-dd").parse(x.getReleaseDate()));
         }
-        return filmDates;
+        return filmReleaseDate;
     }
 
     public ArrayList<String> getAllFilmTitles() {
@@ -110,9 +100,11 @@ public class SortFilm {
         return filmTitles;
     }
 
-    public ArrayList<Double> getFilmRating() {
+    public HashMap<String, Double> getFilmRating() {
+        HashMap<String, Double> filmRating = new HashMap<>();
+
         for (Films x : filmList) {
-            filmRating.add(x.getRating());
+            filmRating.put(x.getTitle(), x.getRating());
         }
         return filmRating;
     }
@@ -143,12 +135,69 @@ public class SortFilm {
         return sortedList;
     }
 
-    public ArrayList<Films> sortRatingHigh() {
+    public LinkedHashMap<String, Double> sortHashMapByValuesLowToHigh(HashMap<String, Double> passedMap) {
+        List<String> mapKeys = new ArrayList<>(passedMap.keySet());
+        List<Double> mapValues = new ArrayList<>(passedMap.values());
+        Collections.sort(mapValues);
+        Collections.sort(mapKeys);
+
+        LinkedHashMap<String, Double> sortedMap =
+                new LinkedHashMap<>();
+
+        Iterator<Double> valueIt = mapValues.iterator();
+        while (valueIt.hasNext()) {
+            Double val = valueIt.next();
+            Iterator<String> keyIt = mapKeys.iterator();
+
+            while (keyIt.hasNext()) {
+                String key = keyIt.next();
+                Double comp1 = passedMap.get(key);
+                Double comp2 = val;
+
+                if (comp1.equals(comp2)) {
+                    keyIt.remove();
+                    sortedMap.put(key, val);
+                    break;
+                }
+            }
+        }
+        return sortedMap;
+    }
+
+    public LinkedHashMap<String, Double> sortHashMapByValuesHighToLow(HashMap<String, Double> passedMap) {
+        List<String> mapKeys = new ArrayList<>(passedMap.keySet());
+        List<Double> mapValues = new ArrayList<>(passedMap.values());
+        Collections.sort(mapValues, Collections.reverseOrder());
+        Collections.sort(mapKeys, Collections.reverseOrder());
+
+        LinkedHashMap<String, Double> sortedMap =
+                new LinkedHashMap<>();
+
+        Iterator<Double> valueIt = mapValues.iterator();
+        while (valueIt.hasNext()) {
+            Double val = valueIt.next();
+            Iterator<String> keyIt = mapKeys.iterator();
+
+            while (keyIt.hasNext()) {
+                String key = keyIt.next();
+                Double comp1 = passedMap.get(key);
+                Double comp2 = val;
+
+                if (comp1.equals(comp2)) {
+                    keyIt.remove();
+                    sortedMap.put(key, val);
+                    break;
+                }
+            }
+        }
+        return sortedMap;
+    }
+
+    public ArrayList<Films> sortRating(LinkedHashMap<String, Double> sortedHashMap) {
         ArrayList<Films> sortedList = new ArrayList<>();
-        Collections.sort(this.filmRating, Collections.reverseOrder());
-        for (double i : filmRating) {
+        for (String i : sortedHashMap.keySet()) {
             for (Films j : filmList) {
-                if (i == j.getRating()) {
+                if (i.equals(j.getTitle())) {
                     sortedList.add(j);
                 }
             }
@@ -156,26 +205,12 @@ public class SortFilm {
         return sortedList;
     }
 
-    public ArrayList<Films> sortRatingLow() {
-        ArrayList<Films> sortedList = new ArrayList<>();
-        Collections.sort(this.filmRating);
-        for (double i : filmRating) {
-            for (Films j : filmList) {
-                if (i == j.getRating()) {
-                    sortedList.add(j);
-                }
-            }
-        }
-        return sortedList;
-    }
-
-    public ArrayList<Films> sortReleaseDateOld() throws ParseException {
+    public ArrayList<Films> sortReleaseDate(LinkedHashMap<String, Date> stringDateLinkedHashMap) throws ParseException {
         ArrayList<Films> sortedList = new ArrayList<>();
         Collections.sort(this.filmDates);
-        for (Date i : filmDates) {
+        for (String i : stringDateLinkedHashMap.keySet()) {
             for (Films j : filmList) {
-                Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(j.getReleaseDate());
-                if (i.equals(date1)) {
+                if (i.equals(j.getTitle())) {
                     sortedList.add(j);
                 }
             }
@@ -183,18 +218,62 @@ public class SortFilm {
         return sortedList;
     }
 
-    public ArrayList<Films> sortReleaseDateNew() throws ParseException {
-        ArrayList<Films> sortedList = new ArrayList<>();
-        Collections.sort(this.filmDates, Collections.reverseOrder());
-        for (Date i : filmDates) {
-            for (Films j : filmList) {
-                Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(j.getReleaseDate());
-                if (i.equals(date1)) {
-                    sortedList.add(j);
+    public LinkedHashMap<String, Date> sortHashMapDateByValuesHighToLow(HashMap<String, Date> passedMap) {
+        List<String> mapKeys = new ArrayList<>(passedMap.keySet());
+        List<Date> mapValues = new ArrayList<>(passedMap.values());
+        Collections.sort(mapValues, Collections.reverseOrder());
+        Collections.sort(mapKeys, Collections.reverseOrder());
+
+        LinkedHashMap<String, Date> sortedMap =
+                new LinkedHashMap<>();
+
+        Iterator<Date> valueIt = mapValues.iterator();
+        while (valueIt.hasNext()) {
+            Date val = valueIt.next();
+            Iterator<String> keyIt = mapKeys.iterator();
+
+            while (keyIt.hasNext()) {
+                String key = keyIt.next();
+                Date comp1 = passedMap.get(key);
+                Date comp2 = val;
+
+                if (comp1.equals(comp2)) {
+                    keyIt.remove();
+                    sortedMap.put(key, val);
+                    break;
                 }
             }
         }
-        return sortedList;
+        return sortedMap;
+    }
+
+    public LinkedHashMap<String, Date> sortHashMapDateByValuesLowToHigh(HashMap<String, Date> passedMap) {
+        List<String> mapKeys = new ArrayList<>(passedMap.keySet());
+        List<Date> mapValues = new ArrayList<>(passedMap.values());
+        Collections.sort(mapValues);
+        Collections.sort(mapKeys);
+
+        LinkedHashMap<String, Date> sortedMap =
+                new LinkedHashMap<>();
+
+        Iterator<Date> valueIt = mapValues.iterator();
+        while (valueIt.hasNext()) {
+            Date val = valueIt.next();
+            Iterator<String> keyIt = mapKeys.iterator();
+
+            while (keyIt.hasNext()) {
+                String key = keyIt.next();
+                Date comp1 = passedMap.get(key);
+                Date comp2 = val;
+
+                if (comp1.equals(comp2)) {
+                    keyIt.remove();
+                    sortedMap.put(key, val);
+                    break;
+                }
+            }
+        }
+        return sortedMap;
     }
 }
 

@@ -130,7 +130,7 @@ public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPIT
                 this.filterFilm.getFilter().filter("Western");
                 return true;
             case R.id.sort_a_to_z:
-                this.sortFilm.getFilter().filter("sortZtoA");
+                this.sortFilm.getFilter().filter("sortAtoZ");
                 return true;
             case R.id.sort_z_to_a:
                 this.sortFilm.getFilter().filter("sortZtoA");
