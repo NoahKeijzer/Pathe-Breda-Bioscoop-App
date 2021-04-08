@@ -1,7 +1,9 @@
 package com.example.pathebredabioscoopapp.ui;
 
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,6 +37,7 @@ import com.example.pathebredabioscoopapp.logic.SortFilm;
 import java.util.ArrayList;
 
 public class PersonalListActivity extends AppCompatActivity implements FilmAPITask.FilmListener {
+    private final String TAG = getClass().getSimpleName();
     private TextView mTitleText;
     private FilmAdapter filmAdapter;
     private RecyclerView recyclerView;
@@ -50,6 +53,8 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
     private Double seekValue ;
     private Button buttonSeekbar;
     private TextView seekbarProgress;
+    private Button buttonDatePicker;
+    private String date;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,6 +78,8 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
         if (film != null && filmlist != null) {
             new AddToListTask(film, filmlist, filmAdapter).execute();
         }
+
+        this.filterFilm = new FilterFilm(filteredFilmList, fullFilmList, filmAdapter);
     }
 
     @Override
@@ -84,11 +91,22 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        this.filterFilm = new FilterFilm(filteredFilmList, fullFilmList, filmAdapter);
         this.sortFilm = new SortFilm(fullFilmList, filmAdapter);
         this.searchFilm = new SearchFilm(fullFilmList, filmAdapter);
+        seekbarProgress = findViewById(R.id.sb_progress);
+        ratingSeekbar = findViewById(R.id.sb_seekbar);
+        buttonSeekbar = findViewById(R.id.bt_seekbar_execute);
+        datePicker = findViewById(R.id.dp_date_picker);
+        buttonDatePicker = findViewById(R.id.bt_date_picker_execute);
         switch (item.getItemId()) {
             case R.id.action_sort:
+                return true;
+            case R.id.action_filter:
+                seekbarProgress.setVisibility(TextView.GONE);
+                ratingSeekbar.setVisibility(SeekBar.GONE);
+                buttonSeekbar.setVisibility(Button.GONE);
+                datePicker.setVisibility(DatePicker.GONE);
+                buttonDatePicker.setVisibility(Button.GONE);
                 return true;
             case R.id.filter_on_genre_all:
                 this.filterFilm.getFilter().filter("All");
@@ -151,9 +169,6 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
                 this.filterFilm.getFilter().filter("Western");
                 return true;
             case R.id.filter_on_rating:
-                seekbarProgress = findViewById(R.id.sb_progress);
-                ratingSeekbar = findViewById(R.id.sb_seekbar);
-                buttonSeekbar = findViewById(R.id.bt_seekbar_execute);
                 seekbarProgress.setVisibility(SeekBar.VISIBLE);
                 ratingSeekbar.setVisibility(SeekBar.VISIBLE);
                 buttonSeekbar.setVisibility(SeekBar.VISIBLE);
@@ -174,14 +189,30 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
                         seekbarProgress.setText("Rating: " + progressValue);
                     }
                 });
-                return true;
-            case R.id.bt_seekbar_execute:
-                String strSeekValue = Double.toString(seekValue);
-                this.filterFilm.getFilter().filter(strSeekValue);
+                buttonSeekbar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String strSeekValue = Double.toString(seekValue);
+                        Log.d(TAG, "seekValue is" + strSeekValue +".");
+                        filterFilm.getFilter().filter(strSeekValue);
+                    }
+                });
                 return true;
             case R.id.filter_on_date:
-                datePicker = findViewById(R.id.dp_date_picker);
                 datePicker.setVisibility(SeekBar.VISIBLE);
+                buttonDatePicker.setVisibility(SeekBar.VISIBLE);
+                datePicker.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
+                    @Override
+                    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        date = year + "-"+ checkDigit((monthOfYear+1)) + "-" + checkDigit(dayOfMonth);
+                    }
+                });
+                buttonDatePicker.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        filterFilm.getFilter().filter(date);
+                    }
+                });
                 return true;
             case R.id.sort_a_to_z:
                 this.sortFilm.getFilter().filter("sortZtoA");
@@ -241,5 +272,10 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
     public void onFilmsListAvailable(ArrayList<Films> filmList) {
         this.fullFilmList.addAll(filmList);
         this.filmAdapter.notifyDataSetChanged();
+    }
+
+    public String checkDigit(int number)
+    {
+        return number<=9?"0"+number:String.valueOf(number);
     }
 }
