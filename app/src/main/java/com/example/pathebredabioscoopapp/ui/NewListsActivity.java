@@ -36,17 +36,10 @@ public class NewListsActivity extends AppCompatActivity {
     private EditText mTitleInput;
     private TextView mDescription;
     private EditText mDescriptionInput;
-    private RadioGroup mRadioGroup;
-    private Spinner mSpinner;
     private Button mbtnSave;
     private Button mbtnCancel;
     private final OkHttpClient client = new OkHttpClient();
-    private final static String AZ = "A -> Z";
-    private final static String ZA = "Z -> A";
-    private final static String RHL = "Rating High -> Low";
-    private final static String RLH = "Rating Low -> High";
-    private final static String RDNO = "Release date New -> OldZ";
-    private final static String RDON = "Release date Old -> Release date New";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,16 +50,9 @@ public class NewListsActivity extends AppCompatActivity {
         mTitleInput = findViewById(R.id.et_make_list_title);
         mDescription = findViewById(R.id.tv_make_list_description);
         mDescriptionInput = findViewById(R.id.et_make_list_description);
-        mSpinner = findViewById(R.id.sp_sort_list);
         mbtnSave = findViewById(R.id.btn_save_list);
         mbtnCancel = findViewById(R.id.btn_cancel_list);
 
-        String[] arraySpinner = new String[]{
-                AZ, ZA, RHL, RLH, RDNO, RDON
-        };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, arraySpinner);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mSpinner.setAdapter(adapter);
         mbtnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +64,6 @@ public class NewListsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String title = String.valueOf(mTitleInput.getText());
                 String description = String.valueOf(mDescriptionInput.getText());
-                String sort = mSpinner.getSelectedItem().toString();
                 new CreateNewListTask().execute(title,description);
 
                 Context context = v.getContext();
