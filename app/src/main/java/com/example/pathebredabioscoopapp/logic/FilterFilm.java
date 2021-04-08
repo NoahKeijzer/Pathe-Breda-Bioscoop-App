@@ -15,14 +15,13 @@ public class FilterFilm {
     private final String TAG = getClass().getSimpleName();
     private ArrayList<Films> filteredFilmList ;
     private ArrayList<Films> fullFilmList ;
-    private ArrayList<Films> entireFilmList;
+    private ArrayList<Films> entireFilmList = new ArrayList<>();
     private FilmAdapter filmAdapter;
 
     public FilterFilm(ArrayList<Films> filteredFilmList, ArrayList<Films> fullFilmList, FilmAdapter filmAdapter){
         this.filteredFilmList = filteredFilmList;
         this.fullFilmList = fullFilmList;
         this.filmAdapter = filmAdapter;
-        this.entireFilmList = new ArrayList<>();
     }
 
     public Filter filter = new Filter() {
@@ -33,24 +32,21 @@ public class FilterFilm {
 
             FilterResults results = new FilterResults();
             String strConstraint = constraint.toString();
+
             if(entireFilmList.isEmpty()){
                 entireFilmList.addAll(fullFilmList);
             }
 
-            /*if (strConstraint.equals("All")) {
+            if(strConstraint.equals("All")){
                 results.values = entireFilmList;
                 return results;
-            }*/
-            if(isGenre(strConstraint)){
+            }else if(isGenre(strConstraint)){
                 filterGenre(strConstraint);
             }else if(isRating(strConstraint)){
                 Double dblConstraint = Double.parseDouble(strConstraint);
                 filterRating(dblConstraint);
-            }else if(isDate(strConstraint)){
-                Date date = parseToDate(strConstraint);
-                filterReleaseDate(date);
             }else{
-                return null;
+                filterReleaseDate(strConstraint);
             }
 
             results.values = filteredFilmList;
@@ -92,31 +88,9 @@ public class FilterFilm {
         }
     }
 
-    public boolean isDate(String strConstraint) {
-        String sDate = strConstraint;
-        Date date = null;
-        try {
-            date = new SimpleDateFormat("yyyy/MM/dd").parse(sDate);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
-    }
-
-    public Date parseToDate(String strConstraint){
-        String sDate = strConstraint;
-        Date date = null;
-
-        try {
-            date = new SimpleDateFormat("yyyy/MM/dd").parse(sDate);
-            return date;
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     public ArrayList<Films> filterGenre(String genreConstraint){
+        Log.d(TAG, "filterGenre is aangeroepen.");
+        this.filteredFilmList.clear();
 
         for(Films film: this.entireFilmList){
             if(film.getGenre().equals(genreConstraint)){
@@ -133,7 +107,9 @@ public class FilterFilm {
 
     public ArrayList<Films> filterRating(Double ratingConstraint){
         Log.d(TAG, "filterRating aangeroepen.");
-        for(Films film: this.fullFilmList){
+        this.filteredFilmList.clear();
+
+        for(Films film: this.entireFilmList){
             if(film.getRating() == ratingConstraint){
                 this.filteredFilmList.add(film);
             }
@@ -146,10 +122,12 @@ public class FilterFilm {
         return null;
     }
 
-    public ArrayList<Films> filterReleaseDate(Date dateConstraint){
+    public ArrayList<Films> filterReleaseDate(String dateConstraint){
+        Log.d(TAG, "filterReleaseDate aangeroepen.");
+        this.filteredFilmList.clear();
 
-        for(Films film: this.fullFilmList){
-            if(film.getReleaseDate().equals(dateConstraint.toString())){
+        for(Films film: this.entireFilmList){
+            if(film.getReleaseDate().equals(dateConstraint)){
                 this.filteredFilmList.add(film);
             }
         }

@@ -10,14 +10,15 @@
 
         <menu>
             <item
+                android:id="@+id/filter_on_genre_all"
+                android:title="All"
+                app:showAsAction="never"/>
+            <item
                 android:id="@+id/filter_on_genre"
                 android:title="Genre"
                 app:showAsAction="never">
 
                 <menu>
-                    <item
-                        android:id="@+id/filter_on_genre_all"
-                        android:title="All"/>
                     <item
                         android:id="@+id/filter_on_genre_action"
                         android:title="Action"/>
