@@ -41,7 +41,7 @@ public class ReviewActivity extends AppCompatActivity implements ReviewsAPITask.
         recyclerView = findViewById(R.id.rv_general_recyclerview);
         recyclerView.setLayoutManager(layoutManager);
         mTitle = findViewById(R.id.tv_general_recyclerview_title);
-        mTitle.setText("Reviews");
+        mTitle.setText(R.string.reviews);
 
         film = (Films) getIntent().getSerializableExtra("REVIEW_NAME");
 

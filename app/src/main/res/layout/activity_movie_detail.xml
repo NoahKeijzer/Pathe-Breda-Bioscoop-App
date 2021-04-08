@@ -23,8 +23,7 @@
                 android:textSize="26dp"
                 android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:text="Movietitle"/>
+                android:layout_marginTop="10dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -36,20 +35,17 @@
                     android:id="@+id/tv_movie_detail_genre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="genre"
                     android:textColor="@color/white"/>
                 <TextView
                     android:id="@+id/tv_movie_detail_release_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="12-02-1997"
                     android:textColor="@color/white"
                     android:layout_marginStart="18dp"/>
                 <TextView
                     android:id="@+id/tv_movie_detail_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="123"
                     android:textColor="@color/white"
                     android:layout_marginStart="18dp"/>
             </LinearLayout>
@@ -87,22 +83,19 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:orientation="horizontal"
-                android:layout_gravity="center"
-                >
+                android:layout_gravity="center">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginRight="30dp"
-                    >
+                    android:layout_marginRight="30dp">
                     <TextView
                         android:id="@+id/tv_movie_detail_actor_one"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:textColor="@color/white"
-                        android:text="actor1"
                         android:layout_gravity="center"
                         />
                     <ImageView
@@ -122,9 +115,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:textColor="@color/white"
-                        android:text="actor1"
-                        android:layout_gravity="center"
-                        />
+                        android:layout_gravity="center" />
                     <ImageView
                         android:id="@+id/iv_movie_detail_actor_two"
                         android:layout_width="70dp"
@@ -134,15 +125,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginRight="30dp"
-                    >
+                    android:layout_marginRight="30dp" >
                     <TextView
                         android:id="@+id/tv_movie_detail_actor_three"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:textColor="@color/white"
-                        android:text="actor1"
                         android:layout_gravity="center"
                         />
                     <ImageView
@@ -166,8 +155,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginLeft="20dp"
-                android:layout_marginBottom="20dp"
-                >
+                android:layout_marginBottom="20dp">
                 <Button
                     android:id="@+id/btn_view_reviews"
                     android:layout_width="wrap_content"
@@ -183,16 +171,4 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_reviews"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="20dp"
-            android:visibility="invisible"
-            />
-    </LinearLayout>
 </GridLayout>

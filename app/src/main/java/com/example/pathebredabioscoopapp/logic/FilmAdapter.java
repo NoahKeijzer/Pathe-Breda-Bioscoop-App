@@ -33,14 +33,14 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
     private FilmList filmListObject;
 
     public FilmAdapter(List filmList, int layoutIdForListItem, FilmList filmListObject) {
-        Log.d(TAG, "FilmAdapter constructor is aangeroepen.");
+//        Log.d(TAG, "FilmAdapter constructor is aangeroepen.");
         this.filmList = filmList;
         this.layoutIdForListItem = layoutIdForListItem;
         this.filmListObject = filmListObject;
     }
 
     public FilmAdapter(ArrayList<Films> fullFilmList, int layoutIdForListItem) {
-        Log.d(TAG, "FilmAdapter constructor is aangeroepen.");
+//        Log.d(TAG, "FilmAdapter constructor is aangeroepen.");
         if(this.filmList != null) {
             this.filmList.clear();
             this.filmList = fullFilmList;
@@ -53,7 +53,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
     @NonNull
     @Override
     public FilmViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d(TAG, "onCreateViewHolder() is aangeroepen.");
+//        Log.d(TAG, "onCreateViewHolder() is aangeroepen.");
 
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -65,7 +65,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull FilmViewHolder holder, int position) {
-        Log.d(TAG, "onBind is aangeroepen");
+ //       Log.d(TAG, "onBind is aangeroepen");
 
         Films film = filmList.get(position);
 
@@ -92,7 +92,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "getItemCount(): Er zijn " + filmList.size() + " items.");
+//        Log.d(TAG, "getItemCount(): Er zijn " + filmList.size() + " items.");
         return filmList.size();
     }
 
@@ -109,7 +109,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
         public FilmViewHolder(@NonNull View view) {
             super(view);
 
-            Log.d(TAG, "ViewHolder constructor is aangeroepen.");
+//            Log.d(TAG, "ViewHolder constructor is aangeroepen.");
 
             mFilmImage = (ImageView) itemView.findViewById(R.id.iv_poster_image);
             mTitleText = (TextView) itemView.findViewById(R.id.tv_movie_title);
@@ -144,7 +144,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "onClick() van een view is aangeroepen.");
+ //                   Log.d(TAG, "onClick() van een view is aangeroepen.");
                     int position = 1;
                     for (Films movie : filmList) {
                         if (mTitleText.getText().toString().equals(movie.getTitle())) {

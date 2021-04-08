@@ -31,14 +31,14 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
     private AllListsActivity allListsActivity = new AllListsActivity();
 
     public ReviewAdapter(List reviewList) {
-        Log.d(TAG, "ReviewAdapter constructor is aangeroepen.");
+  //      Log.d(TAG, "ReviewAdapter constructor is aangeroepen.");
         this.reviewList = reviewList;
     }
 
     @NonNull
     @Override
     public ReviewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d(TAG, "onCreateViewHolder() is aangeroepen.");
+//        Log.d(TAG, "onCreateViewHolder() is aangeroepen.");
 
         Context context = parent.getContext();
 
@@ -52,23 +52,23 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
     @Override
     public void onBindViewHolder(@NonNull ReviewAdapter.ReviewViewHolder holder, int position) {
-        Log.d(TAG, "onBind is aangeroepen");
+   //     Log.d(TAG, "onBind is aangeroepen");
 
         Reviews review = reviewList.get(position);
 
-        holder.mUsername.setText("Username: " + String.valueOf(review.getUsername()));
-        holder.mContent.setText("Review: \n\n" + String.valueOf(review.getContent()));
+        holder.mUsername.setText("" + R.string.username + ": " + String.valueOf(review.getUsername()));
+        holder.mContent.setText("" + R.string.review + ": " + "\n\n" + String.valueOf(review.getContent()));
     }
 
     @Override
     public int getItemCount() {
 
         if (null == reviewList) {
-            Log.d(TAG, "getItemCount(): Er zijn 0 items.");
+   //         Log.d(TAG, "getItemCount(): Er zijn 0 items.");
             return 0;
         }
 
-        Log.d(TAG, "getItemCount(): Er zijn " + reviewList.size() + " items.");
+  //      Log.d(TAG, "getItemCount(): Er zijn " + reviewList.size() + " items.");
         return reviewList.size();
     }
 
@@ -79,7 +79,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         public ReviewViewHolder(@NonNull View view) {
             super(view);
 
-            Log.d(TAG, "ViewHolder constructor is aangeroepen.");
+      //      Log.d(TAG, "ViewHolder constructor is aangeroepen.");
 
             mUsername = (TextView) itemView.findViewById(R.id.tv_username);
             mContent = (TextView) itemView.findViewById(R.id.tv_review_description);

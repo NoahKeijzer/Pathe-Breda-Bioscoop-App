@@ -69,14 +69,14 @@ public class JSONConverter implements Serializable {
                 filmLists.add(new FilmList(id, name, filmList));
             }
         } catch (JSONException e) {
-            Log.d(TAG, "Geen JSON object");
+   //         Log.d(TAG, "Geen JSON object");
             e.printStackTrace();
         }
         return filmLists;
     }
 
     public ArrayList<Films> convertFilm() {
-        Log.d(TAG, "convertJsonToArrayList is aangeroepen");
+ //       Log.d(TAG, "convertJsonToArrayList is aangeroepen");
         ArrayList<Films> results = new ArrayList<>();
 
         try {
@@ -103,7 +103,7 @@ public class JSONConverter implements Serializable {
     }
 
     public ArrayList<Films> convertPersonalList() {
-        Log.d(TAG, "convertJsonToArrayList is aangeroepen");
+ //       Log.d(TAG, "convertJsonToArrayList is aangeroepen");
         ArrayList<Films> results = new ArrayList<>();
 
         try {
@@ -130,7 +130,7 @@ public class JSONConverter implements Serializable {
     }
 
     public String convertGenreFilm() {
-        Log.d(TAG, "convertJsonToArrayList Genre is aangeroepen");
+ //       Log.d(TAG, "convertJsonToArrayList Genre is aangeroepen");
         String genre = "";
         try {
             JSONObject genreResult = new JSONObject(response);
@@ -148,7 +148,7 @@ public class JSONConverter implements Serializable {
     }
 
     public ArrayList<Actors> convertActorsFilm() {
-        Log.d(TAG, "convertJsonToArrayList Actors is aangeroepen");
+ //       Log.d(TAG, "convertJsonToArrayList Actors is aangeroepen");
         ArrayList<Actors> actors = new ArrayList<>();
 
         try {

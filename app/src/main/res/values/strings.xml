@@ -6,7 +6,6 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
     <string name="title_text">Title of list</string>
     <string name="description_text">title of description</string>
     <string name="input_title_text">Input text here</string>
@@ -19,11 +18,17 @@
     <string name="activity_trailer_link">Click to view trailer</string>
     <string name="activity_view_reviews">View reviews</string>
     <string name="activity_write_reviews">Write a review</string>
-
+    <string name="personal_list">Personal list</string>
+    <string name="explore_movies">Explore movies</string>
+    <string name="popular_movies">Popular movies</string>
+    <string name="new_review">New review</string>
     <string name="private_list">Private list</string>
     <string name="public_list">Public_list</string>
     <string name="item_list_placeholder">This is a place holder list</string>
-
+    <string name="review_updating_rating">Rating:  </string>
+    <string name="reviews">Reviews</string>
+    <string name="review">Review</string>
+    <string name="username">Username:</string>
     <string-array name="sort_type">
         <item>A -> Z</item>
         <item>Z -> A</item>
@@ -32,10 +37,6 @@
         <item>Release date new -> old</item>
         <item>Release date old -> new</item>
     </string-array>
-
-
-
-
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>

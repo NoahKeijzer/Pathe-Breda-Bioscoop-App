@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">PatheBredaBioscoopApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Opties</string>
+    <string name="title_text">Titel lijst</string>
+    <string name="description_text">Omschrijving titel</string>
+    <string name="input_title_text">Plaats een titel hier</string>
+    <string name="input_description_text">Plaats een omschrijving</string>
+    <string name="action_save">opslaan</string>
+    <string name="action_cancel">Annuleer</string>
+    <string name="new_review_title">New Review</string>
+    <string name="new_review_give_rating">Geef een beoordeling</string>
+    <string name="new_review_submit">Indienen</string>
+    <string name="activity_trailer_link">Klik om de trailer te bekijken</string>
+    <string name="activity_view_reviews">Bekijk recensies</string>
+    <string name="activity_write_reviews">Schrijf een recensie </string>
+    <string name="personal_list">Persoonlijke lijst</string>
+    <string name="explore_movies">Verken films</string>
+    <string name="popular_movies">Populaire films</string>
+    <string name="new_review">Nieuwe recensie</string>
+    <string name="private_list">Prive lijst</string>
+    <string name="public_list">Publieke lijst</string>
+    <string name="item_list_placeholder">Dit is een tijdelijke aanduiding </string>
+    <string name="review_updating_rating">Beoordeling:  </string>
+    <string name="reviews">Recensies</string>
+    <string name="review">Recensie</string>
+    <string name="username">Gebruikersnaam:</string>
+    <string-array name="sort_type">
+        <item>A -> Z</item>
+        <item>Z -> A</item>
+        <item>Beoordeling hoog -> laag</item>
+        <item>Beoordeling laag -> hoog</item>
+        <item>Uitgave datum nieuw -> oud</item>
+        <item>Uitgave datum oud -> nieuw</item>
+    </string-array>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_filter">Filter</string>
+    <string name="menu_sort">Sort</string>
+    <string name="menu_add">Add</string>
+</resources>

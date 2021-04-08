@@ -27,16 +27,14 @@
             android:id="@+id/btn_start_personal_list"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="Personal list"
-            android:layout_marginTop="60dp"
-            />
+            android:text="@string/personal_list"
+            android:layout_marginTop="60dp"/>
 
         <Button
             android:id="@+id/btn_start_explore_movies"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="Explore movies"
-
+            android:text="@string/explore_movies"
             android:layout_marginTop="30dp"
             />
     </LinearLayout>

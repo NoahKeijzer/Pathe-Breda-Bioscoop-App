@@ -47,9 +47,5 @@ public class CreateNewListTask extends AsyncTask<String, Void, Void> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
-
-
 }

@@ -40,7 +40,6 @@ public class AllListsActivity extends AppCompatActivity implements FilmListAPITa
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new FilmListAPITask(this).execute();
         setContentView(R.layout.activity_personal_lists);
         mTitleText = findViewById(R.id.tv_personal_lists_title);
         layoutManager = new LinearLayoutManager(this);
@@ -49,6 +48,7 @@ public class AllListsActivity extends AppCompatActivity implements FilmListAPITa
         personalListAdapter = new ListAdapter(filmList);
         personalListRecyclerView.setAdapter(personalListAdapter);
         mTitleText.setText("Personal lists");
+        new FilmListAPITask(this).execute();
         Films film = (Films) getIntent().getSerializableExtra("ADD_TO_LIST");
         if (film != null) {
             personalListAdapter.setFilm(film);

@@ -58,7 +58,7 @@ public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPIT
         setContentView(R.layout.activity_recycler_view);
         layoutManager = new LinearLayoutManager(this);
         mTitleText = findViewById(R.id.tv_general_recyclerview_title);
-        mTitleText.setText("Populair movies");
+        mTitleText.setText(R.string.popular_movies);
         recyclerView = findViewById(R.id.rv_general_recyclerview);
         recyclerView.setLayoutManager(layoutManager);
         int layoutIdForListItem = R.layout.explore_list_item;

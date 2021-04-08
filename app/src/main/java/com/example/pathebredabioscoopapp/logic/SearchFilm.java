@@ -26,7 +26,6 @@ public class SearchFilm {
         protected FilterResults performFiltering(CharSequence constraint) {
             ArrayList<Films> filteredList = new ArrayList<>();
             FilterResults results = new FilterResults();
-
             if (fullFilmList.isEmpty()) {
                 fullFilmList.addAll(filmList);
             }
@@ -50,7 +49,7 @@ public class SearchFilm {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            Log.d(TAG, "publishResults() is aangeroepen");
+    //        Log.d(TAG, "publishResults() is aangeroepen");
             filmList.clear();
             filmList.addAll((ArrayList) results.values);
             filmAdapter.notifyDataSetChanged();
