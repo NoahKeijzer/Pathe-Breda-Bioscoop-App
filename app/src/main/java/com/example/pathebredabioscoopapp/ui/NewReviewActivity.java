@@ -33,8 +33,10 @@ public class NewReviewActivity extends AppCompatActivity {
     private Button mSubmit;
     private Button mCancel;
     private Films film;
+    private String s = "";
 
     private static final String FILM_INTENT = "FILM_INTENT";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,7 +49,8 @@ public class NewReviewActivity extends AppCompatActivity {
         mGiveRating = findViewById(R.id.tv_give_rating_title);
         mCurrentRate = findViewById(R.id.tv_current_rating);
         mRatingSeekbar = findViewById(R.id.simpleSeeker);
-        mCurrentRate.setText(R.string.review_updating_rating + mRatingSeekbar.getProgress());
+        s = getString(R.string.review_updating_rating);
+        mCurrentRate.setText(s);
         film = (Films) getIntent().getSerializableExtra(FILM_INTENT);
 
         mRatingSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -56,14 +59,14 @@ public class NewReviewActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
                 double p = progressValue;
                 progress = (p/10);
-                mCurrentRate.setText("" + R.string.review_updating_rating + progress);
+                mCurrentRate.setText("" + s + " " + progress);
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {}
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                mCurrentRate.setText("" + R.string.review_updating_rating + progress);
+                mCurrentRate.setText("" + s + " " + progress);
             }
         });
 
