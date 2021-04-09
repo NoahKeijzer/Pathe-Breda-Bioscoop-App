@@ -76,21 +76,6 @@ public class AllListsActivity extends AppCompatActivity implements FilmListAPITa
     }
 
     @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-    }
-
-    @Override
     public void onFilmListReady(ArrayList<FilmList> FilmLists) {
         this.filmList.addAll(FilmLists);
         this.personalListAdapter.notifyDataSetChanged();

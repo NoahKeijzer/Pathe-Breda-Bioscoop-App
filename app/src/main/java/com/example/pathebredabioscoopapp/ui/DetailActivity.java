@@ -48,8 +48,6 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
     private ImageView mActorThreeImage;
     private Button mTrailerButton;
     private Button mViewReviewButton;
-    private RecyclerView mRecyclerView;
-    private LinearLayoutManager layout;
     private Button mGiveRatingButton;
 
     private static final String FILM_INTENT = "FILM_INTENT";
@@ -168,20 +166,4 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         }
         return super.onOptionsItemSelected(item);
     }
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-    }
-
-
 }

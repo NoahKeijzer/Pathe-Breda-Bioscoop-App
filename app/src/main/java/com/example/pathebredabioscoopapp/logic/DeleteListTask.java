@@ -28,13 +28,11 @@ import okhttp3.Response;
 
 public class DeleteListTask extends AsyncTask<Integer, Void, Void> {
     private final OkHttpClient client = new OkHttpClient();
-    private ListAdapter listAdapter;
     private int filmListId;
 
 
-    public DeleteListTask(FilmList filmlist, ListAdapter listAdapter) {
+    public DeleteListTask(FilmList filmlist) {
         this.filmListId = filmlist.getId();
-        this.listAdapter = listAdapter;
     }
 
     @Override

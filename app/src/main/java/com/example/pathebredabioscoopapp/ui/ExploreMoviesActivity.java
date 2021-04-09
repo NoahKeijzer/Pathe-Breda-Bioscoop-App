@@ -182,9 +182,11 @@ public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPIT
                 buttonSeekbar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String strSeekValue = Double.toString(seekValue);
-                        Log.d(TAG, "seekValue is" + strSeekValue +".");
-                        filterFilm.getFilter().filter(strSeekValue);
+                        if (seekValue != null) {
+                            String strSeekValue = Double.toString(seekValue);
+                            Log.d(TAG, "seekValue is" + strSeekValue + ".");
+                            filterFilm.getFilter().filter(strSeekValue);
+                        }
                     }
                 });
                 return true;
@@ -200,7 +202,9 @@ public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPIT
                 buttonDatePicker.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        filterFilm.getFilter().filter(date);
+                        if (date != null) {
+                            filterFilm.getFilter().filter(date);
+                        }
                     }
                 });
                 return true;
@@ -242,20 +246,6 @@ public class ExploreMoviesActivity extends AppCompatActivity implements FilmAPIT
         return true;
     }
 
-    @Override
-    public void onConfigurationChanged  (@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-    }
 
     @Override
     public void onFilmsListAvailable(ArrayList<Films> filmList) {

@@ -28,6 +28,7 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> imple
     private FilmListener filmListener;
 
     public FilmAPITask(FilmListener filmListener) {
+
         this.filmListener = filmListener;
     }
 
@@ -38,10 +39,6 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> imple
 
     public String stringRequestAllMovies() {
         return BASE_URL + "movie/popular?api_key=" + API_KEY + "&language=en-US&page=1";
-    }
-
-    public String stringRequestTrendingMovies() {
-        return BASE_URL + "trending/movie/week?api_key=" + API_KEY;
     }
 
     public String stringRequestActorsFilm(int id) {
@@ -102,10 +99,6 @@ public class FilmAPITask extends AsyncTask<String, Void, ArrayList<Films>> imple
         return null;
     }
 
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
 
     @Override
     protected void onPostExecute(ArrayList<Films> films) {

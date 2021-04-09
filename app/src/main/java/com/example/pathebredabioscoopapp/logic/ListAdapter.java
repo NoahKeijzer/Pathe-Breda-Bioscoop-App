@@ -95,7 +95,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
                     }
                     FilmList filmList = list.get(position);
                     Context context = v.getContext();
-                    new DeleteListTask(filmList, listAdapter).execute();
+                    new DeleteListTask(filmList).execute();
                     Class destinationActivity = AllListsActivity.class;
                     Intent startChildActivityIntent = new Intent(context, destinationActivity);
                     context.startActivity(startChildActivityIntent);

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PatheBredaBioscoopApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Opções</string>
+    <string name="title_text">Título da lista</string>
+    <string name="description_text">Descrição da lista</string>
+    <string name="input_title_text">Insira aqui o título</string>
+    <string name="input_description_text">Insira aqui a descrição</string>
+    <string name="action_save">Salvar</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="new_review_title">Nova avaliação</string>
+    <string name="new_review_give_rating">Dê uma nova avaliação</string>
+    <string name="new_review_submit">Enviar</string>
+    <string name="activity_trailer_link">Clique para ver o trailer</string>
+    <string name="activity_view_reviews">Ver avaliações</string>
+    <string name="activity_write_reviews">Escreva uma avaliação</string>
+    <string name="personal_list">Lista pessoal</string>
+    <string name="explore_movies">Veja filmes</string>
+    <string name="popular_movies">Filmes populares</string>
+    <string name="new_review">Nova avaliação</string>
+    <string name="private_list">Lista privada</string>
+    <string name="public_list">Lista publica</string>
+    <string name="item_list_placeholder">Este é um espaço reservado</string>
+    <string name="review_updating_rating">"Avaliação:  "</string>
+    <string name="reviews">"Avaliação:  "</string>
+    <string name="review">"Avaliação:  "</string>
+    <string name="username">Nome do usuário</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_filter">Filter</string>
+    <string name="menu_sort">Sort</string>
+    <string name="menu_add">Add</string>
+</resources>

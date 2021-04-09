@@ -17,22 +17,14 @@ import java.util.Scanner;
 
 import retrofit2.Call;
 
+import static com.example.pathebredabioscoopapp.logic.FilmAPITask.API_KEY;
+import static com.example.pathebredabioscoopapp.logic.FilmAPITask.BASE_URL;
+
 public class FilmListAPITask extends AsyncTask<String, Void, ArrayList<FilmList>> {
-    public static final String API_KEY = "90104c23f74fdca587142d076b5df361";
-    public static final String BASE_URL = "https://api.themoviedb.org/3/";
-    public static final String BASE_POSTER_PATH_URL = "https://image.tmdb.org/t/p/w500";
     public static final String SESSION_ID = "db55b43e42578d56dabbe2e110797041090fc6e7";
     public static final String ACCOUNT_ID = "10255531";
 
     private FilmListListener listener = null;
-
-    public String stringRequestAllMovies(){
-        return BASE_URL + "movie/popular?api_key=" + API_KEY + "&language=en-US&page=1";
-    }
-
-    public String stringRequestTrendingMovies(){
-        return BASE_URL + "trending/movie/week?api_key=" + API_KEY;
-    }
 
     public String stringRequestUserLists(){
         return BASE_URL + "account/" + ACCOUNT_ID + "/lists?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID;

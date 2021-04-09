@@ -54,8 +54,6 @@ public class StartScreenActivity extends AppCompatActivity {
                 startActivity(new Intent(StartScreenActivity.this, ExploreMoviesActivity.class));
             }
         });
-
-
     }
 
     @Override
@@ -71,19 +69,4 @@ public class StartScreenActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-    }
-
 }

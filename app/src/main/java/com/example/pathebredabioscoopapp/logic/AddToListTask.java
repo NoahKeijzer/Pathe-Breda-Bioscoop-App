@@ -3,8 +3,10 @@ package com.example.pathebredabioscoopapp.logic;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.pathebredabioscoopapp.R;
 import com.example.pathebredabioscoopapp.domain.FilmList;
 import com.example.pathebredabioscoopapp.domain.Films;
 import com.example.pathebredabioscoopapp.ui.AllListsActivity;
@@ -24,16 +26,13 @@ import okhttp3.Response;
 
 public class AddToListTask extends AsyncTask<Integer, Void, Void>  {
     private final OkHttpClient client = new OkHttpClient();
-    private FilmAdapter filmAdapter;
     private int filmId;
     private int filmListId;
-    private Context context;
 
-    public AddToListTask(Films film, FilmList filmlist, FilmAdapter filmAdapter, Context context) {
+
+    public AddToListTask(Films film, FilmList filmlist) {
         this.filmId = film.getId();
         this.filmListId = filmlist.getId();
-        this.filmAdapter = filmAdapter;
-        this.context = context;
     }
 
     @Override
@@ -56,7 +55,6 @@ public class AddToListTask extends AsyncTask<Integer, Void, Void>  {
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) {
                 throw new IOException("Unexpected code " + response);
-
             }
 
             Headers responseHeaders = response.headers();
@@ -67,10 +65,5 @@ public class AddToListTask extends AsyncTask<Integer, Void, Void>  {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
     }
 }

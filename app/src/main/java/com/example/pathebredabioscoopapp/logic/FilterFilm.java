@@ -13,10 +13,11 @@ import java.util.Date;
 
 public class FilterFilm {
     private final String TAG = getClass().getSimpleName();
-    private ArrayList<Films> filteredFilmList ;
+    private ArrayList<Films> filteredFilmList;
     private ArrayList<Films> fullFilmList ;
     private ArrayList<Films> entireFilmList = new ArrayList<>();
     private FilmAdapter filmAdapter;
+    private SortFilm sortFilm;
 
     public FilterFilm(ArrayList<Films> filteredFilmList, ArrayList<Films> fullFilmList, FilmAdapter filmAdapter){
         this.filteredFilmList = filteredFilmList;
@@ -108,15 +109,16 @@ public class FilterFilm {
         this.filteredFilmList.clear();
 
         for(Films film: this.entireFilmList){
-            if(film.getRating() == ratingConstraint){
+            if(film.getRating() >= ratingConstraint){
                 this.filteredFilmList.add(film);
             }
         }
 
         if(this.filteredFilmList != null){
-            return this.filteredFilmList;
+            sortFilm = new SortFilm(filteredFilmList, filmAdapter);
+            filteredFilmList = sortFilm.sortRating(sortFilm.sortHashMapByValuesLowToHigh(sortFilm.getFilmRating()));
+            return filteredFilmList;
         }
-
         return null;
     }
 

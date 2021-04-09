@@ -28,10 +28,8 @@ import java.util.List;
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder> implements Serializable {
     private final String TAG = getClass().getSimpleName();
     private List<Reviews> reviewList;
-    private AllListsActivity allListsActivity = new AllListsActivity();
 
     public ReviewAdapter(List reviewList) {
-  //      Log.d(TAG, "ReviewAdapter constructor is aangeroepen.");
         this.reviewList = reviewList;
     }
 

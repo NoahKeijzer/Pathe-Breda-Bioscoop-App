@@ -14,6 +14,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -58,11 +59,12 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
     private TextView seekbarProgress;
     private Button buttonDatePicker;
     private String date;
+    private LinearLayout personalListActivity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        this.personalListActivity = findViewById(R.id.personal_list);
         setContentView(R.layout.activity_recycler_view);
         mTitleText = findViewById(R.id.tv_general_recyclerview_title);
         layoutManager = new LinearLayoutManager(this);
@@ -80,7 +82,7 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
 
         if (film != null && filmlist != null) {
             finish();
-            new AddToListTask(film, filmlist, filmAdapter, this).execute();
+            new AddToListTask(film, filmlist).execute();
             Class destinationActivity = PersonalListActivity.class;
             Intent startChildActivityIntent = new Intent(this, destinationActivity);
             startChildActivityIntent.putExtra("LIST_NAME",  filmlist);
@@ -200,9 +202,11 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
                 buttonSeekbar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String strSeekValue = Double.toString(seekValue);
-                        Log.d(TAG, "seekValue is" + strSeekValue +".");
-                        filterFilm.getFilter().filter(strSeekValue);
+                        if (seekValue != null) {
+                            String strSeekValue = Double.toString(seekValue);
+                            Log.d(TAG, "seekValue is" + strSeekValue + ".");
+                            filterFilm.getFilter().filter(strSeekValue);
+                        }
                     }
                 });
                 return true;
@@ -218,7 +222,9 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
                 buttonDatePicker.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        filterFilm.getFilter().filter(date);
+                        if (date != null) {
+                            filterFilm.getFilter().filter(date);
+                        }
                     }
                 });
                 return true;
@@ -260,20 +266,6 @@ public class PersonalListActivity extends AppCompatActivity implements FilmAPITa
         return true;
     }
 
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-    }
 
 
     @Override
